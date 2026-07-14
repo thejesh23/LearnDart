@@ -79,32 +79,79 @@ Every `.dart` file in this repo, grouped by category. Any file can be run with `
 - [throwing_exceptions](basics/11_errors/throwing_exceptions.dart)
 - [try_catch](basics/11_errors/try_catch.dart)
 
+## backtracking
+- [n_queens](backtracking/n_queens.dart)
+- [rat_in_a_maze](backtracking/rat_in_a_maze.dart)
+- [subset_sum](backtracking/subset_sum.dart)
+- [sudoku_solver](backtracking/sudoku_solver.dart)
+- [word_break](backtracking/word_break.dart)
+
+## bit_manipulation
+- [count_set_bits](bit_manipulation/count_set_bits.dart)
+- [gray_code](bit_manipulation/gray_code.dart)
+- [hamming_distance](bit_manipulation/hamming_distance.dart)
+- [is_power_of_two](bit_manipulation/is_power_of_two.dart)
+- [reverse_bits](bit_manipulation/reverse_bits.dart)
+- [single_number_xor](bit_manipulation/single_number_xor.dart)
+- [swap_without_temp](bit_manipulation/swap_without_temp.dart)
+- [toggle_bit](bit_manipulation/toggle_bit.dart)
+
 ## ciphers
 - [caesar_cipher](ciphers/caesar_cipher.dart)
 - [rot13](ciphers/rot13.dart)
 - [vigenere_cipher](ciphers/vigenere_cipher.dart)
 
 ## data_structures
+- [avl_tree](data_structures/avl_tree.dart)
 - [binary_search_tree](data_structures/binary_search_tree.dart)
 - [binary_tree](data_structures/binary_tree.dart)
+- [circular_queue](data_structures/circular_queue.dart)
+- [disjoint_set](data_structures/disjoint_set.dart)
 - [doubly_linked_list](data_structures/doubly_linked_list.dart)
+- [fenwick_tree](data_structures/fenwick_tree.dart)
 - [graph_adjacency_list](data_structures/graph_adjacency_list.dart)
 - [hash_table](data_structures/hash_table.dart)
 - [linked_list](data_structures/linked_list.dart)
+- [lru_cache](data_structures/lru_cache.dart)
 - [min_heap](data_structures/min_heap.dart)
 - [queue](data_structures/queue.dart)
+- [segment_tree](data_structures/segment_tree.dart)
 - [stack](data_structures/stack.dart)
+- [trie](data_structures/trie.dart)
 
 ## dynamic_programming
 - [coin_change](dynamic_programming/coin_change.dart)
+- [edit_distance](dynamic_programming/edit_distance.dart)
 - [fibonacci_dp](dynamic_programming/fibonacci_dp.dart)
 - [knapsack_01](dynamic_programming/knapsack_01.dart)
 - [longest_common_subsequence](dynamic_programming/longest_common_subsequence.dart)
+- [longest_increasing_subsequence](dynamic_programming/longest_increasing_subsequence.dart)
+- [matrix_chain_multiplication](dynamic_programming/matrix_chain_multiplication.dart)
+- [rod_cutting](dynamic_programming/rod_cutting.dart)
+
+## geometry
+- [convex_hull_graham](geometry/convex_hull_graham.dart)
+- [line_intersection](geometry/line_intersection.dart)
+- [point_distance](geometry/point_distance.dart)
+- [polygon_area](geometry/polygon_area.dart)
 
 ## graphs
+- [bellman_ford](graphs/bellman_ford.dart)
 - [bfs](graphs/bfs.dart)
 - [dfs](graphs/dfs.dart)
 - [dijkstra](graphs/dijkstra.dart)
+- [floyd_warshall](graphs/floyd_warshall.dart)
+- [kruskal](graphs/kruskal.dart)
+- [prim](graphs/prim.dart)
+- [topological_sort](graphs/topological_sort.dart)
+- [union_find_cycle_detection](graphs/union_find_cycle_detection.dart)
+
+## greedy
+- [activity_selection](greedy/activity_selection.dart)
+- [fractional_knapsack](greedy/fractional_knapsack.dart)
+- [gas_station](greedy/gas_station.dart)
+- [huffman_encoding](greedy/huffman_encoding.dart)
+- [job_sequencing](greedy/job_sequencing.dart)
 
 ## maths
 - [factorial_iterative](maths/factorial_iterative.dart)
@@ -120,27 +167,43 @@ Every `.dart` file in this repo, grouped by category. Any file can be run with `
 - [power_recursive](maths/power_recursive.dart)
 - [sieve_of_eratosthenes](maths/sieve_of_eratosthenes.dart)
 
+## number_theory
+- [chinese_remainder](number_theory/chinese_remainder.dart)
+- [euler_totient](number_theory/euler_totient.dart)
+- [extended_euclidean](number_theory/extended_euclidean.dart)
+- [miller_rabin](number_theory/miller_rabin.dart)
+- [modular_exponentiation](number_theory/modular_exponentiation.dart)
+
 ## recursion
 - [combinations](recursion/combinations.dart)
+- [flatten_nested_list](recursion/flatten_nested_list.dart)
 - [permutations](recursion/permutations.dart)
+- [subset_generation](recursion/subset_generation.dart)
 - [tower_of_hanoi](recursion/tower_of_hanoi.dart)
 
 ## searches
 - [binary_search](searches/binary_search.dart)
 - [binary_search_recursive](searches/binary_search_recursive.dart)
+- [exponential_search](searches/exponential_search.dart)
+- [fibonacci_search](searches/fibonacci_search.dart)
+- [interpolation_search](searches/interpolation_search.dart)
 - [jump_search](searches/jump_search.dart)
 - [linear_search](searches/linear_search.dart)
 - [ternary_search](searches/ternary_search.dart)
 
 ## sorts
 - [bubble_sort](sorts/bubble_sort.dart)
+- [bucket_sort](sorts/bucket_sort.dart)
 - [counting_sort](sorts/counting_sort.dart)
 - [heap_sort](sorts/heap_sort.dart)
 - [insertion_sort](sorts/insertion_sort.dart)
 - [merge_sort](sorts/merge_sort.dart)
 - [quick_sort](sorts/quick_sort.dart)
+- [radix_sort](sorts/radix_sort.dart)
 - [selection_sort](sorts/selection_sort.dart)
 - [shell_sort](sorts/shell_sort.dart)
+- [tim_sort](sorts/tim_sort.dart)
+- [tree_sort](sorts/tree_sort.dart)
 
 ## strings
 - [character_frequency](strings/character_frequency.dart)
