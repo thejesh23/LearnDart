@@ -3,9 +3,10 @@
 // happen whether or not an exception was thrown.
 int safeDivide(int a, int b) {
   try {
+    if (b == 0) throw ArgumentError('cannot divide by zero');
     return a ~/ b;
-  } on IntegerDivisionByZeroException {
-    print('cannot divide by zero, returning 0');
+  } on ArgumentError catch (e) {
+    print('argument error: ${e.message}, returning 0');
     return 0;
   } catch (e) {
     print('unexpected: $e');
