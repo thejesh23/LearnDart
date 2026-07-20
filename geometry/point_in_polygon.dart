@@ -1,5 +1,16 @@
-// Ray-casting test: shoot a horizontal ray from `point` and count how
-// many polygon edges it crosses. Odd -> inside, even -> outside.
+// Point-in-polygon test via ray casting: shoot a horizontal ray to the
+// right from the query point and count how many polygon edges it crosses.
+// Odd count -> inside, even -> outside (Jordan curve theorem).
+//
+// Works on any simple polygon — convex, concave, or with holes if you
+// treat each hole as a separate ring and sum the parities. Points
+// exactly on an edge are a numerical edge case; you may need a small
+// tolerance depending on your application (this file doesn't guarantee
+// a stable answer on the boundary).
+//
+// Complexity: O(n) time, O(1) space. If you're doing many queries
+// against the same polygon, precompute a horizontal-slab decomposition
+// (Kirkpatrick's) for O(log n) per query at O(n log n) preprocessing.
 bool pointInPolygon(
     (double, double) point, List<(double, double)> polygon) {
   final n = polygon.length;

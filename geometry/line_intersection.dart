@@ -1,5 +1,15 @@
-// Intersection of segments p1-p2 and p3-p4 using parametric form. Returns
-// the point of intersection if the segments cross, or null if they don't.
+// Intersection of two line segments using the parametric form. Each
+// segment is written as P + t·(Q - P) for t in [0, 1]; the intersection
+// exists iff we can find t and u both in [0, 1] that make the two
+// parametric points equal.
+//
+// The `denom` value is the 2-D cross product of the two direction
+// vectors. When it's zero the segments are parallel (or collinear); no
+// unique intersection point exists — collinear overlap would need a
+// separate check.
+//
+// Complexity: O(1) time and space. Building block for polygon clipping,
+// line-of-sight tests, and collision detection.
 (double, double)? segmentIntersection(
     (double, double) p1, (double, double) p2,
     (double, double) p3, (double, double) p4) {

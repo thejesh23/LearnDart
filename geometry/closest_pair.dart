@@ -1,8 +1,17 @@
 import 'dart:math';
 
-// Closest pair of points via divide and conquer in O(n log n). Splits by
-// x-coordinate, recurses, then merges — checking only the narrow band
-// around the split line against the current best distance.
+// Closest pair of points via divide and conquer in O(n log n).
+//
+// Sort by x, split in half by x-median, recurse on each side to get the
+// closest pair *within* each half. Let d = min of the two best distances.
+// The trick — and the reason this beats O(n^2) — is that the closest
+// cross-side pair must both lie in a vertical strip of width 2d around
+// the split line. And within that strip, sorted by y, each point only
+// needs to check ~7 neighbors ahead of it (a geometric packing argument).
+//
+// Complexity: T(n) = 2·T(n/2) + O(n) = O(n log n) time, O(n) space.
+// A naïve pairwise comparison would be O(n^2). Foundational algorithm
+// for computational geometry, taught alongside merge sort.
 double _dist(List<double> a, List<double> b) =>
     sqrt(pow(a[0] - b[0], 2) + pow(a[1] - b[1], 2));
 

@@ -1,4 +1,15 @@
-// Shoelace formula: signed area of a simple polygon given its vertices.
+// Shoelace formula (Gauss's area formula): compute the area of a simple
+// (non-self-intersecting) polygon from just its vertex coordinates.
+//
+// Sum over each edge (x_i * y_{i+1} - x_{i+1} * y_i); the absolute
+// value of half the sum is the area. The name comes from how the
+// cross-multiplied terms visually "lace up" if you write them in
+// two columns. The signed version tells you orientation: positive for
+// counter-clockwise vertex order, negative for clockwise.
+//
+// Requires the polygon to be simple. Self-intersecting polygons (like a
+// figure-8) give a weighted sum of enclosed regions instead of a plain
+// area. Complexity: O(n) time and O(1) space.
 double polygonArea(List<(double, double)> vertices) {
   final n = vertices.length;
   if (n < 3) return 0;

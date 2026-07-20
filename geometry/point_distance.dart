@@ -1,3 +1,15 @@
+// Three common distance metrics between 2-D points. Each answers "how
+// far apart" but with a different geometric intuition:
+//
+//   Euclidean  — straight-line ("as the crow flies"). The default.
+//   Manhattan  — sum of x and y differences ("taxicab" distance).
+//                Right for grid-walking movement.
+//   Chebyshev  — max of x and y differences ("chessboard king"
+//                movement, where diagonals cost 1).
+//
+// Complexity: O(1) each. All three come up constantly in graph search
+// (BFS/A*), physics simulations, clustering, and computer graphics.
+
 import 'dart:math';
 
 double euclideanDistance((double, double) a, (double, double) b) {

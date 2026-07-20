@@ -1,5 +1,16 @@
-// Rotate an n×n matrix 90° clockwise in place. Transpose then reverse
-// each row.
+// Rotate an n×n matrix 90° clockwise in place with two O(n^2) passes:
+//   1. Transpose across the main diagonal (swap m[i][j] with m[j][i]).
+//   2. Reverse each row.
+//
+// The mathematical identity behind this: rotating a matrix by 90° CW
+// is equivalent to transposing and then flipping horizontally.
+// Counter-clockwise = transpose then flip vertically. 180° = flip
+// horizontally then flip vertically. Great mental image for keeping
+// the eight image-transform combinations straight.
+//
+// Complexity: O(n^2) time (necessary — must touch every element),
+// O(1) extra space. Classic interview question because it exercises
+// index arithmetic, in-place manipulation, and multi-pass thinking.
 void rotateMatrix90CW(List<List<int>> m) {
   final n = m.length;
   for (int i = 0; i < n; i++) {
