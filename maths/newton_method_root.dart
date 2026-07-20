@@ -24,13 +24,13 @@ double _symmetricDerivative(double Function(double) f, double x, {double h = 1e-
 }
 
 double newtonRoot(double Function(double) f,
-    {double? Function(double)? fPrime,
+    {double Function(double)? fPrime,
      double initial = 1.0, int maxIter = 100, double tol = 1e-12}) {
   double x = initial;
   for (int i = 0; i < maxIter; i++) {
     final fx = f(x);
     if (fx.abs() < tol) return x;
-    final dfx = fPrime?.call(x) ?? _symmetricDerivative(f, x);
+    final dfx = fPrime == null ? _symmetricDerivative(f, x) : fPrime(x);
     if (dfx == 0) throw StateError('zero derivative at x=$x');
     x -= fx / dfx;
   }
