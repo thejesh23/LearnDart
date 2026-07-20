@@ -1,6 +1,17 @@
-// Lucas-Lehmer primality test for Mersenne numbers 2^p - 1 where p is an
-// odd prime. The sequence s0 = 4, s(k+1) = s(k)^2 - 2 is computed mod Mp;
-// 2^p - 1 is prime iff s(p-2) == 0.
+// Lucas-Lehmer primality test for Mersenne numbers M_p = 2^p - 1
+// (where p itself is an odd prime).
+//
+// Iterate s_0 = 4, s_{k+1} = s_k^2 - 2 (mod M_p). M_p is prime iff
+// s_{p-2} == 0. That's it — no witnesses, no probability, exactly p - 2
+// squarings.
+//
+// This is the *fastest known* deterministic primality test for
+// Mersenne numbers and is the engine behind GIMPS (the Great Internet
+// Mersenne Prime Search). Every "largest known prime" record since
+// 1996 has been a Mersenne prime found by exactly this algorithm.
+//
+// Complexity: O(p) modular squarings, each on a p-bit integer, so
+// O(p^3) with schoolbook multiplication or O(p^2 log p) with FFT.
 bool isPrimeInt(int n) {
   if (n < 2) return false;
   if (n < 4) return true;

@@ -1,8 +1,17 @@
 import 'dart:math';
 
-// Fermat primality test: if n is prime, a^(n-1) ≡ 1 (mod n) for every a
-// coprime with n. Probabilistic — fools Carmichael numbers, so use
-// Miller-Rabin when correctness matters.
+// Fermat primality test: by Fermat's little theorem, if n is prime
+// then for every a coprime with n, a^(n-1) ≡ 1 (mod n). Sample
+// several random `a` values; if any fails the congruence, n is
+// definitely composite. If all pass, n is probably prime.
+//
+// The dangerous case: *Carmichael numbers* (561, 1105, 1729, ...) are
+// composite yet pass Fermat's test for every witness coprime with them.
+// The Fermat test misses these entirely. Miller-Rabin adds an extra
+// square-root check inside the exponentiation that catches Carmichael
+// numbers — so for real use always prefer number_theory/miller_rabin.dart.
+//
+// Complexity: O(k · log n) modular exponentiations for k witnesses.
 int _mulMod(int a, int b, int m) {
   int result = 0;
   a %= m;

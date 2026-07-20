@@ -1,8 +1,20 @@
 import 'dart:math';
 
-// Sieve of Atkin: a modern prime sieve running in O(n / log log n) time
-// with the constant hidden behind more elaborate quadratic-form tests
-// than Eratosthenes. Faster in practice for very large n.
+// Sieve of Atkin: a modern prime sieve invented in 2003 that improves
+// the asymptotic time of the classical Sieve of Eratosthenes by using
+// specific quadratic forms modulo 60 to identify primes.
+//
+// The idea: a number n > 3 is prime iff an odd count of (x, y) pairs
+// satisfy one of three quadratic equations for the right residue class
+// of n mod 12. Toggle the primality flag each time such a pair is
+// found; primes end up flagged an odd number of times. Then eliminate
+// squares of primes (like a mini-Eratosthenes) to remove any remaining
+// composites.
+//
+// Complexity: O(n / log log n) — a small asymptotic edge on Eratosthenes'
+// O(n log log n), and modestly faster in practice for very large n.
+// See maths/sieve_of_eratosthenes.dart for the classical form and
+// number_theory/linear_sieve.dart for a strict O(n) alternative.
 List<int> sieveOfAtkin(int limit) {
   if (limit < 2) return const [];
   final isPrime = List<bool>.filled(limit + 1, false);

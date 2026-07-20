@@ -1,4 +1,15 @@
-// Count integers in [1, n] coprime with n using its prime factorization.
+// Euler's totient function φ(n): the count of integers in [1, n] that
+// share no common factor with n other than 1 (i.e. gcd(k, n) = 1).
+//
+// The multiplicative formula:
+//     φ(n) = n · Π (1 - 1/p)
+// where the product runs over distinct prime factors p of n. This
+// implementation factors n on the fly (up to √n trial division) and
+// multiplies the correction into `result` as each new prime is found.
+//
+// φ is central to Fermat–Euler theorem: a^φ(n) ≡ 1 (mod n) for any a
+// coprime with n. That's the mathematical foundation of RSA — key
+// generation picks φ(p·q) = (p-1)(q-1). Complexity: O(√n).
 int eulerTotient(int n) {
   int result = n;
   int x = n;

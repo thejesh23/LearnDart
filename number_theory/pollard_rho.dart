@@ -1,7 +1,20 @@
 import 'dart:math';
 
 // Pollard's rho: find a non-trivial factor of a composite integer.
-// Expected O(n^(1/4)) time — much faster than trial division for large n.
+// Expected O(n^(1/4)) time — dramatically better than the O(√n) of
+// trial division and the main algorithm used to factor "medium-sized"
+// composites (up to ~60 bits) before switching to quadratic sieve or
+// number field sieve for larger inputs.
+//
+// The trick: iterate a pseudo-random function x -> (x^2 + c) mod n
+// with two "hares", one running twice as fast as the other. By the
+// birthday paradox, in ~√p iterations (where p is the smallest prime
+// factor) the two hares' values differ by a multiple of p, so their
+// gcd with n reveals p.
+//
+// If the hares cycle without finding a factor (d == n), re-randomize
+// c and try again. Complexity: expected O(n^(1/4)); worst case
+// unbounded (but astronomically unlikely).
 BigInt _gcd(BigInt a, BigInt b) {
   while (b != BigInt.zero) { final t = b; b = a % b; a = t; }
   return a;

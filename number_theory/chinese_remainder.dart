@@ -1,4 +1,18 @@
-// Solve x ≡ r_i (mod m_i) for pairwise-coprime moduli using CRT.
+// Chinese Remainder Theorem: given the residues of x modulo several
+// pairwise-coprime moduli, recover x modulo their product.
+//
+// Concretely, if x ≡ r_1 (mod m_1), r_2 (mod m_2), ..., r_k (mod m_k),
+// and the m_i are pairwise coprime, there's a unique solution mod
+// M = m_1 · m_2 · ... · m_k. Compute it via a weighted sum of the
+// residues, where each weight is (M / m_i) · inverse(M / m_i, m_i).
+//
+// Returns null if the moduli are not pairwise coprime (the general CRT
+// exists but needs the residues themselves to be compatible). Uses
+// extended Euclidean (extended_euclidean.dart) to find the inverses.
+//
+// Applications: RSA speedup (using p and q separately then combining),
+// hash tables with several buckets, secret sharing, ancient calendar
+// alignment problems. Complexity: O(k · log M).
 (int g, int x, int y) _extGcd(int a, int b) {
   if (b == 0) return (a, 1, 0);
   final (g, x1, y1) = _extGcd(b, a % b);
