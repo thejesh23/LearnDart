@@ -1,6 +1,24 @@
-// Rail fence cipher: write the plaintext in a zig-zag pattern across
-// `rails` rows, then read row by row. Trivial transposition cipher —
-// educational only.
+// Rail fence cipher: a *transposition* cipher (as opposed to a
+// substitution cipher). The letters themselves aren't changed — only
+// their positions. Write the plaintext across `rails` rows in a
+// zig-zag pattern, then concatenate the rows to get the ciphertext.
+//
+// Example with rails = 3 on "HELLOWORLD":
+//     H . . . O . . . L .
+//     . E . L . W . R . D
+//     . . L . . . O . . .
+// Reading row by row: HOL ELWRD LO.
+//
+// Encoding is straightforward; decoding needs a two-pass approach to
+// reconstruct the zig-zag pattern and then re-slot each ciphertext
+// letter back into its original column.
+//
+// The key is just the number of rails, so brute-forcing takes at most
+// a few dozen tries — negligible security. It's a good introduction to
+// transposition ciphers and to the general encode/decode symmetry of
+// permutation-based encryption.
+//
+// Complexity: O(n) time and O(n) space for both directions.
 String railFenceEncode(String text, int rails) {
   if (rails <= 1) return text;
   final rows = List.generate(rails, (_) => StringBuffer());

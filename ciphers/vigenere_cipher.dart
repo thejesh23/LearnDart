@@ -1,3 +1,17 @@
+// Vigenère cipher: a Caesar cipher with a *different* shift for each
+// letter, cycling through a keyword. Encrypting position i uses shift
+// key[i mod key.length] - 'a'. This defeats simple frequency analysis
+// on the ciphertext, since a plaintext 'e' can become any of |key|
+// different ciphertext letters.
+//
+// It resisted attack for three centuries until Kasiski (1863) noticed
+// that repeated bigrams in the ciphertext often occur at distances that
+// are multiples of the key length — giving you the key length, after
+// which each column reduces to a Caesar cipher solvable by frequency.
+//
+// Complexity: O(n) time and O(n) space. Modern replacement: stream
+// ciphers built on cryptographically secure keystream generators
+// (ChaCha20, AES-CTR).
 String _shiftChar(int rune, int shift) {
   if (rune >= 65 && rune <= 90) {
     return String.fromCharCode(65 + (rune - 65 + shift) % 26);
