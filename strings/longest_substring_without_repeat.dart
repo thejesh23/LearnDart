@@ -1,5 +1,17 @@
 // Length of the longest substring of `s` with no repeated characters.
-// Sliding window with a last-index map — O(n).
+//
+// Sliding-window technique: `start` is the left boundary; `i` is the
+// right boundary; grow the window by advancing `i`, and shrink it
+// (bump `start`) whenever the character at `i` was already seen
+// inside the current window. The lastSeen map lets that shrink step
+// jump directly to the position after the previous occurrence
+// rather than dropping one character at a time.
+//
+// Each character is visited at most twice (once as new right,
+// possibly once when start jumps past it), so total work is O(n).
+// The template — two indices, a "seen" map, and a monotonically
+// advancing right end — recurs across "longest window satisfying
+// X" problems. Complexity: O(n) time, O(alphabet) space.
 int longestUniqueSubstring(String s) {
   final lastSeen = <String, int>{};
   int start = 0, best = 0;

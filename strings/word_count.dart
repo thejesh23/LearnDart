@@ -1,3 +1,17 @@
+// Tally the occurrences of each word in a body of text.
+//
+// Splits on any non-word character (regex \W+) to handle punctuation
+// and multiple spaces uniformly. Lowercases everything so "The" and
+// "the" merge. For serious NLP use a proper tokenizer — this treats
+// "don't" as two tokens, gets confused by hyphenated words, and
+// ignores morphology (running, runs, run all count separately).
+//
+// The `??` fallback pattern is the standard Dart idiom for
+// "increment count in map or start at 0". Complexity: O(n) time and
+// O(unique-words) space. Building block for word clouds, term
+// frequency in TF-IDF (which then divides by document count), and
+// basic search indexing.
+
 Map<String, int> wordCount(String text) {
   final counts = <String, int>{};
   final words = text

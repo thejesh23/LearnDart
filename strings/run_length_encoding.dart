@@ -1,5 +1,16 @@
-// Run-length encoding and decoding — unlike string_compression.dart, this
-// always returns the encoded form and can round-trip back to the original.
+// Run-length encoding (RLE): represent runs of identical characters
+// as a count followed by the character, e.g. "aaabbc" -> "3a2b1c".
+//
+// One of the oldest compression schemes — trivial to implement, very
+// fast, and highly effective on data with long repeats (early
+// bitmap/fax images, printer control codes, some game-console
+// graphics formats). Useless on random or high-entropy data (where
+// it makes the output *longer*). Modern general-purpose compressors
+// like DEFLATE use RLE as a step inside more elaborate pipelines.
+//
+// Unlike strings/string_compression.dart, this always emits the
+// encoded form and includes a decoder for round-tripping.
+// Complexity: O(n) time, O(n) space.
 String runLengthEncode(String s) {
   final buf = StringBuffer();
   int i = 0;

@@ -1,5 +1,19 @@
-// Knuth-Morris-Pratt substring search. Builds a longest-proper-prefix-suffix
-// table so the scan never revisits a character in the text. O(n + m).
+// Knuth-Morris-Pratt substring search. Precomputes a Longest Proper
+// Prefix-Suffix (LPS) table for the pattern; when a mismatch happens
+// at pattern position j, the table says how far back the pattern can
+// be shifted such that a partial match is preserved — no re-scanning
+// of already-matched text characters needed.
+//
+// The invariant that makes KMP work: after failure at pattern[j], we
+// know that text[i - j..i - 1] == pattern[0..j - 1]. The LPS table
+// tells us the longest proper prefix of pattern[0..j] that's also a
+// suffix — exactly the amount of overlap we can carry into the next
+// alignment.
+//
+// Complexity: O(n + m) time and O(m) space, worst case included.
+// Contrast with naive O(n · m) and average-case O(n) methods like
+// Boyer-Moore (strings/boyer_moore_search.dart) and Rabin-Karp
+// (strings/rabin_karp.dart).
 List<int> _buildLps(String pattern) {
   final m = pattern.length;
   final lps = List<int>.filled(m, 0);

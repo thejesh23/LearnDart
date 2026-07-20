@@ -1,6 +1,18 @@
-// Manacher's algorithm: longest palindromic substring in O(n). Adds
-// sentinels between characters so odd- and even-length palindromes fall
-// out of the same code path.
+// Manacher's algorithm: find the longest palindromic substring in
+// O(n) — remarkable because the naive "expand around each center"
+// approach is O(n^2).
+//
+// The setup trick: insert a '#' between every character (and at both
+// ends), plus distinct sentinels '^' and '$' outside. Every palindrome
+// in the original string, odd or even length, becomes an odd-length
+// palindrome in the transformed string centered at some position, so
+// one code path handles both cases.
+//
+// The linear-time achievement comes from reusing work: maintain the
+// rightmost palindrome seen so far, and when computing a new position
+// inside it, use its mirror's palindrome radius as a starting lower
+// bound before extending. Each character extension moves the boundary
+// forward by 1, so total work is O(n) amortized.
 String longestPalindrome(String s) {
   if (s.isEmpty) return '';
   final t = '^#${s.split('').join('#')}#\$';

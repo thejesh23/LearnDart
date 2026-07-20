@@ -1,4 +1,16 @@
-// Are all brackets in `s` matched and properly nested? Handles (), [], {}.
+// Bracket balance check: every opener has a matching closer *and*
+// the pairs nest properly. So "([])" is valid but "([)]" is not.
+//
+// A canonical example of why the stack data structure exists: push
+// each opener you see, and every closer must match the most recent
+// unmatched opener — that's LIFO by definition. At the end, an
+// empty stack means every opener was closed.
+//
+// Same shape underlies HTML/XML tag balance checking, expression
+// evaluators, JSON parsers, and Ruby's `def...end` matching in code
+// editors. Complexity: O(n) time and O(n) space (the stack).
+//
+// See data_structures/stack.dart for the general LIFO primitive.
 bool isValidParentheses(String s) {
   const pairs = {')': '(', ']': '[', '}': '{'};
   final stack = <String>[];

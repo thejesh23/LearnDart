@@ -1,5 +1,14 @@
-// Basic run-length compression. Returns the compressed string only if it's
-// shorter than the original; otherwise returns the input unchanged.
+// Basic run-length compression: replace each maximal run of identical
+// characters with the character followed by the run length.
+//
+// If the "compressed" form ends up longer than the original (e.g. no
+// repeats — every character becomes 2 chars), we return the input
+// unchanged. This is why real compressors add a header and use
+// variable-length codes rather than always applying RLE.
+//
+// Contrast with strings/run_length_encoding.dart, which always
+// returns the encoded form and includes a round-tripping decode.
+// Complexity: O(n) time, O(n) space.
 String stringCompression(String s) {
   if (s.isEmpty) return s;
   final buf = StringBuffer();

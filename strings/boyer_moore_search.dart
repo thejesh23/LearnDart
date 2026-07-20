@@ -1,6 +1,18 @@
-// Boyer-Moore substring search using the bad-character heuristic. Scans
-// the pattern right-to-left; a mismatched text character can shift the
-// pattern by more than one position.
+// Boyer-Moore substring search, with the bad-character heuristic only
+// (the full algorithm adds a good-suffix rule for extra shifts).
+//
+// Trick: compare pattern to text *right to left*. When a mismatch
+// happens at text position s+j against pattern[j], look at the
+// mismatched text character; if it appears in the pattern, shift the
+// pattern so its rightmost occurrence of that character lines up
+// with the text position. If it doesn't appear at all, shift past
+// it entirely.
+//
+// This gives *sublinear* average behavior on random text: typical
+// searches skip more than one character per comparison. Worst case
+// with only the bad-character rule is O(n·m); adding the good-suffix
+// rule brings it to O(n). Used inside the Unix `grep`, `strstr()`
+// implementations, and text editors.
 List<int> boyerMooreSearch(String text, String pattern) {
   final n = text.length;
   final m = pattern.length;

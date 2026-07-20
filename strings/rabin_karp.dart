@@ -1,5 +1,18 @@
-// Rabin-Karp substring search: hash a sliding window of the text and only
-// compare characters when the hash matches. O(n + m) average, O(nm) worst.
+// Rabin-Karp substring search: instead of comparing characters directly
+// at every text position, compute a rolling hash of a sliding text
+// window and compare it against the pattern's hash. Only fall back to
+// character-by-character comparison on a hash match.
+//
+// The rolling hash lets each window transition run in O(1): subtract
+// the outgoing character's contribution, shift, add the incoming
+// character. Uses polynomial rolling hash h(s) = s[0]·b^{m-1} + ...
+// + s[m-1], all mod a prime.
+//
+// Average-case O(n + m); worst case O(n·m) when many hash collisions
+// force the tie-breaking string comparison. Real killer feature: the
+// same setup finds *k* patterns simultaneously in O(n + k·m) via a
+// hash-table lookup on each window's hash — used in plagiarism
+// detection and virus signature scanning.
 const int _base = 256;
 const int _mod = 1_000_000_007;
 
