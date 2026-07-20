@@ -1,4 +1,20 @@
-// Disjoint Set / Union-Find with path compression and union-by-rank.
+// Disjoint Set Union (DSU) — a.k.a. Union-Find. Maintains a
+// partition of {0..n-1} and supports two operations:
+//   find(x): which set does x belong to? (returns representative)
+//   union(a, b): merge a's set with b's
+//
+// Two optimizations bring the amortized cost per operation to
+// α(n) — the inverse Ackermann function, effectively constant for
+// any n you'll ever compute:
+//   - Path compression: `find` re-parents every node on the path
+//     directly to the root.
+//   - Union by rank: attach the shorter tree under the taller one,
+//     minimizing overall height.
+//
+// Central to Kruskal's MST (graphs/kruskal.dart), cycle detection
+// in undirected graphs (graphs/union_find_cycle_detection.dart),
+// connected-component tracking as edges arrive online, Tarjan's
+// off-line LCA, and equivalence-class problems everywhere.
 class DisjointSet {
   final List<int> _parent;
   final List<int> _rank;

@@ -1,3 +1,17 @@
+// Binary max-heap — mirror of the min-heap with parent ≥ children.
+// Same array layout, same sift-up/sift-down structure; the only
+// difference is the direction of the comparison.
+//
+// Used in sorts/heap_sort.dart (repeatedly extract the max and put
+// it at the end), and any "top-k smallest" query (invert the trick
+// from min_heap.dart — use a size-k max-heap and discard anything
+// larger than the top).
+//
+// Both variants are common enough that many libraries provide only
+// one and expect callers to negate comparators for the other; see
+// data_structures/priority_queue.dart for the polymorphic version.
+// Complexity: O(log n) push and pop, O(1) peek.
+
 class MaxHeap {
   final List<int> _data = [];
 

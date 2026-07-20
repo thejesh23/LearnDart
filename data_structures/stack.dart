@@ -1,3 +1,17 @@
+// Stack: last-in, first-out (LIFO) collection. Push adds to the top,
+// pop removes from the top, peek looks without removing.
+//
+// The archetypal use case is anywhere you'd naturally use recursion:
+// the call stack itself is exactly this data structure. Explicit
+// stacks let you iteratively simulate what recursion does — useful
+// when recursion depth would overflow or when you need control over
+// the traversal order (DFS with an explicit stack, expression
+// evaluation, undo history, matched-bracket checking).
+//
+// Backed by a growable List — push/pop at the *end* are O(1)
+// amortized. All ops O(1) time, O(n) space. See
+// strings/valid_parentheses.dart for a canonical application.
+
 class Stack<T> {
   final List<T> _items = [];
 

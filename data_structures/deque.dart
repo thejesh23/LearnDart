@@ -1,5 +1,17 @@
-// Double-ended queue: enqueue and dequeue from either end. Backed by
-// dart:collection's DoubleLinkedQueue which gives O(1) ops on both ends.
+// Deque (double-ended queue): enqueue and dequeue from either end
+// with O(1) time. Union of stack and queue — a superset of both.
+//
+// Common uses beyond generic collections:
+//   - Sliding-window maximum/minimum: maintain a monotonic deque
+//     that yields window extremes in O(1) per shift.
+//   - Palindrome detection: pop from both ends and compare.
+//   - Work-stealing schedulers: each worker uses its own deque,
+//     pushes/pops on one end normally, and steals from the other end.
+//
+// Backed here by dart:collection's DoubleLinkedQueue for guaranteed
+// O(1) at both ends. A circular-buffer deque is also possible and
+// even faster in practice for fixed maximum sizes (better cache
+// behavior). Complexity: O(1) for all core ops.
 import 'dart:collection';
 
 class Deque<T> {

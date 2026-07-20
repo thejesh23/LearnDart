@@ -1,7 +1,21 @@
-import 'dart:math';
+// k-d tree (k-dimensional tree): a BST-like structure for spatial
+// data. Splits alternate between dimensions — x at depth 0, y at
+// depth 1, x at depth 2, and so on. Building on the sorted median
+// at each level gives a balanced tree.
+//
+// The nearest-neighbor search is what makes it powerful: at each
+// node, descend into the side of the split the target is on, then
+// on the way back up check whether the *other* side's bounding
+// region could hold anything closer than the current best — if
+// not, prune. For low-dimensional data this gives O(log n) expected
+// queries; in high dimensions (say k > 20) it degrades to O(n).
+//
+// This 2-D form suffices for GIS/mapping ("nearest gas station"),
+// game-AI target picking, k-nearest-neighbor classification
+// (machine_learning/knn_classifier.dart), and the closest-pair
+// problem for large point sets.
 
-// 2-D k-d tree for nearest-neighbor queries. Splits alternate on x, then
-// y, then x, etc.
+import 'dart:math';
 class _KDNode {
   final List<double> point;
   final int axis;

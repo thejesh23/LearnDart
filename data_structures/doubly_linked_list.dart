@@ -1,3 +1,19 @@
+// Doubly linked list: each node has a `next` and a `prev` pointer.
+// Trades memory (extra pointer per node) for O(1) backward traversal
+// and O(1) removal given a node pointer.
+//
+// Standard interior of dart:collection's DoubleLinkedQueue, C++'s
+// std::list, and Python's collections.deque. Also the basis of the
+// LRU cache — see data_structures/lru_cache.dart — where you need
+// O(1) removal from anywhere in the list.
+//
+// The bookkeeping gotcha: on insertion or removal, remember to
+// update both directions and both endpoints. `head` and `tail`
+// pointers can slip out of sync easily on the empty-list and
+// single-node edge cases.
+//
+// Complexity: O(1) prepend, append, and removal-given-node.
+
 class DNode<T> {
   T value;
   DNode<T>? prev;

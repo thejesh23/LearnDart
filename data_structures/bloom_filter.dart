@@ -1,6 +1,19 @@
-// Bloom filter: probabilistic set with no false negatives but a tunable
-// false-positive rate. Very compact — good for "have I seen this URL?"
-// checks in front of an expensive lookup.
+// Bloom filter: a probabilistic set. `mightContain` may return true
+// for elements that were never added (false positives) but never
+// false for elements that *were* added (no false negatives).
+//
+// The trade-off: a Bloom filter with m bits and k hash functions
+// storing n items has false-positive rate roughly (1 - e^(-kn/m))^k.
+// Choose m and k to hit your target rate — say 10 bits per item and
+// 7 hashes gives ~1% false positives.
+//
+// Killer app: guard-check before an expensive lookup. "Might this
+// URL be in the crawled set?" — if the Bloom filter says no, save
+// the disk seek. Used everywhere in databases (Cassandra, HBase,
+// LevelDB use per-SSTable filters), web caches, and networking.
+//
+// Deletion requires a variant (counting Bloom filter). Complexity:
+// O(k) time per op, O(m) space total — extremely compact.
 class BloomFilter {
   final int _size;
   final int _hashes;

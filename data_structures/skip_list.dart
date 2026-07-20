@@ -1,7 +1,20 @@
-import 'dart:math';
+// Skip list: a probabilistic alternative to balanced trees. A linked
+// list at the bottom, with sparse "express lane" pointer levels above
+// that let you skip forward exponentially fast.
+//
+// Each node gets a random level (geometrically distributed, level k
+// with probability p^k). Expected O(log n) search, insert, and delete
+// — no rotations, no balancing bookkeeping, just coin flips.
+//
+// Real-world uses: Redis sorted sets (ZSET), LevelDB / RocksDB
+// memtables, Java's ConcurrentSkipListMap. The lock-free variants
+// scale much better than tree-based concurrent structures — a big
+// reason skip lists thrive in high-concurrency environments where
+// rotations would require deep locking.
+//
+// Complexity: expected O(log n) per operation, worst case O(n).
 
-// Skip list: probabilistic layered linked list giving O(log n) expected
-// insert / contains without the rotations of a balanced tree.
+import 'dart:math';
 class _SkipNode {
   final int value;
   final List<_SkipNode?> forward;

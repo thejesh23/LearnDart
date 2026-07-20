@@ -1,3 +1,18 @@
+// FIFO queue: first-in, first-out. Enqueue adds to the back, dequeue
+// removes from the front.
+//
+// A naive implementation on top of a List would have O(n) dequeue
+// (shifting every element left after removeFirst). This wraps
+// dart:collection's `Queue`, which is a doubly-linked list under
+// the hood — O(1) at both ends.
+//
+// Central to BFS (graphs/bfs.dart), task schedulers, buffered I/O
+// pipelines, and any producer-consumer pattern. For a fixed-size
+// version see data_structures/circular_queue.dart; for both-ended
+// access see data_structures/deque.dart.
+//
+// Complexity: O(1) enqueue, dequeue, peek. O(n) space.
+
 import 'dart:collection';
 
 class FIFOQueue<T> {

@@ -1,5 +1,17 @@
-// Circular doubly linked list: the tail's next points back to the head and
-// the head's prev points to the tail. Useful for round-robin schedulers.
+// Circular doubly linked list: like a doubly linked list, but the
+// tail's `next` points back to the head and the head's `prev` points
+// to the tail. No null pointers on either end — every node has valid
+// `prev` and `next`, always.
+//
+// The natural structure for round-robin scheduling: each cycle of
+// `rotateLeft()` visits the next process, indefinitely. Also used
+// for Josephus-problem simulations, running one-past-the-end music
+// playlist advance, and any "circular buffer of objects" (not to be
+// confused with the array-backed ring buffer in
+// data_structures/circular_queue.dart, which is fixed-capacity and
+// uses modular indexing rather than pointers).
+//
+// Complexity: O(1) append, O(1) rotate, O(n) traversal.
 class _Node<T> {
   T value;
   _Node<T>? prev, next;

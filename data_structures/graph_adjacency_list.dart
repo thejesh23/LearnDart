@@ -1,3 +1,18 @@
+// Undirected graph represented as an adjacency list: for each node,
+// a set of the nodes it connects to.
+//
+// The two standard graph representations:
+//   - Adjacency list (this file): O(V + E) space, iterating over a
+//     vertex's neighbors is O(deg(v)). Best for sparse graphs.
+//   - Adjacency matrix: O(V²) space, O(1) edge existence check,
+//     O(V) neighbor iteration. Best for dense graphs or when many
+//     "is there an edge?" queries are needed.
+//
+// This uses Set<T> instead of List<T> for each adjacency list, which
+// makes duplicate edges idempotent and edge lookup O(1). All the
+// graph algorithms in graphs/ operate on Map<T, ...> representations
+// like this one, or their weighted variants.
+
 class Graph<T> {
   final Map<T, Set<T>> _adj = {};
 

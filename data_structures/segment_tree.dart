@@ -1,5 +1,19 @@
-// Iterative segment tree for range-sum queries and point updates. O(log n)
-// per query and per update.
+// Segment tree: array-backed binary tree that answers arbitrary
+// range-aggregate queries in O(log n) with O(log n) point updates.
+//
+// Layout: the leaves live in [n, 2n) and each internal node at
+// index i is the aggregate of its two children (2i and 2i+1). The
+// aggregate function here is `+` (range sum), but the same structure
+// works for min/max/gcd/xor — any *associative* operation.
+//
+// The iterative range-query walk is a beautiful piece of code: at
+// each level, pull in the odd-indexed left boundary (it's a "right
+// child" whose sibling belongs to a different subtree) and the even-
+// indexed right boundary, then climb up. See
+// data_structures/fenwick_tree.dart for a lighter alternative when
+// you only need prefix-sum queries.
+//
+// Complexity: O(n) build, O(log n) update, O(log n) query.
 class SegmentTree {
   final int _n;
   final List<int> _tree;

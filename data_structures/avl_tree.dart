@@ -1,4 +1,18 @@
-// Self-balancing binary search tree via AVL rotations.
+// AVL tree: the first self-balancing BST (Adelson-Velsky & Landis,
+// 1962). Every node's left and right subtree heights differ by at
+// most 1, guaranteeing tree height stays O(log n).
+//
+// After each insert (or delete), walk back up the recursion; if a
+// node's balance factor goes to ±2, apply one of four rotations
+// (LL, LR, RR, RL) to restore the invariant. The four cases are
+// distinguished by which grandchild caused the imbalance.
+//
+// Contrast with red-black trees (data_structures/red_black_tree.dart):
+// AVL is more strictly balanced, so lookups are marginally faster —
+// good for read-heavy workloads. Red-black trees do fewer rotations
+// per insert, so they win for write-heavy workloads.
+//
+// Complexity: O(log n) insert, contains, delete. All ops guaranteed.
 class AVLNode {
   int value;
   int height = 1;

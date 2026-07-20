@@ -1,3 +1,20 @@
+// Hash table with separate chaining: fixed number of buckets, each
+// bucket a list of collided key-value pairs. Lookup: hash the key to
+// find the bucket, then linear-scan the bucket for the key.
+//
+// Two big design choices in every hash table:
+//   1. Collision handling: chaining (as here — each bucket a list) vs
+//      open addressing (probe to the next bucket on collision).
+//   2. Load management: chaining tolerates high load factors better
+//      but wastes memory per bucket. Real implementations resize
+//      dynamically to keep the load factor around 0.7-0.75.
+//
+// Dart's built-in Map does all of this properly (and uses open
+// addressing). This implementation exists to demystify what's inside.
+//
+// Complexity: O(1) average for put/get/remove; O(n) worst case when
+// every key collides.
+
 class HashTable<K, V> {
   final List<List<MapEntry<K, V>>> _buckets;
   int _size = 0;

@@ -1,7 +1,21 @@
-import 'dart:math';
+// Treap = tree + heap. Each node stores a value (BST-ordered) and a
+// random priority (heap-ordered). The two orderings together
+// uniquely determine the tree structure.
+//
+// Because priorities are random, the resulting BST is
+// probabilistically balanced — expected O(log n) height. Insertions
+// rotate on the way back up to restore the heap property whenever a
+// child ends up with higher priority than its parent.
+//
+// Much simpler code than AVL or red-black (no color logic, no
+// balance-factor arithmetic — just rotations conditional on
+// priority). See data_structures/avl_tree.dart and
+// data_structures/red_black_tree.dart for the deterministic
+// alternatives.
+//
+// Complexity: expected O(log n) per operation, worst case O(n).
 
-// Treap: a BST keyed on `value` and heap-ordered on a random `priority`.
-// Expected O(log n) height without deterministic balancing.
+import 'dart:math';
 class _TreapNode {
   int value;
   int priority;

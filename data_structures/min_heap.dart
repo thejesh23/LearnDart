@@ -1,3 +1,18 @@
+// Binary min-heap stored as an array. For any index i, its children
+// are at 2i+1 and 2i+2 and its parent is at (i-1)/2. The heap
+// property: every parent is ≤ its children.
+//
+// The array layout means no pointers, no per-node overhead, and
+// perfect cache locality. Push (sift-up) and pop (sift-down) each
+// take O(log n) — one round trip along a path from the leaf to the
+// root or vice versa.
+//
+// Building block for priority queues (Dijkstra, A*, Huffman), the
+// standard trick for "top-k largest" (use a size-k min-heap and
+// discard anything smaller than the top). See
+// data_structures/max_heap.dart for the sibling, and
+// data_structures/priority_queue.dart for a generic wrapper.
+
 class MinHeap {
   final List<int> _data = [];
 

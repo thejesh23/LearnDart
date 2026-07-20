@@ -1,6 +1,16 @@
-// Generic priority queue implemented on top of a binary heap. Items are
-// ordered by the caller-supplied comparator — the "smallest" item is at
-// the front, so pass a reversed comparator for a max-priority queue.
+// Generic priority queue on top of a binary heap. Elements come out
+// in the order defined by the caller-supplied comparator — pass
+// `(a, b) => a.compareTo(b)` for a min-PQ, reversed for a max-PQ.
+//
+// Distinguishes itself from data_structures/min_heap.dart and
+// data_structures/max_heap.dart by holding *arbitrary* generic
+// values, not just ints. Insertion and extraction are O(log n) —
+// the same sift-up/sift-down primitives, parameterized by the
+// comparator instead of a hardcoded `<`.
+//
+// Central to shortest-path and MST algorithms (Dijkstra, Prim), to
+// event-driven simulations (next event = smallest scheduled time),
+// and to top-k queries. Complexity: O(log n) push and pop, O(1) peek.
 class PriorityQueue<T> {
   final int Function(T a, T b) _compare;
   final List<T> _data = [];

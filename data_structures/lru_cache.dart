@@ -1,5 +1,19 @@
-// Least-Recently-Used cache: capacity-bounded map that evicts the least
-// recently touched key on overflow. Backed by LinkedHashMap for O(1) ops.
+// Least Recently Used cache: fixed-capacity key-value store that
+// evicts the least recently accessed entry when full.
+//
+// Classic implementation is a doubly linked list of entries plus a
+// hash map from key to node — get() moves the accessed node to the
+// front, put() inserts at the front and evicts from the back. This
+// implementation piggybacks on Dart's LinkedHashMap, which is
+// exactly that structure internally (insertion-order iteration).
+//
+// Ubiquitous: browser page caches, OS page replacement (approximated
+// via clock or ARC because true LRU is expensive at OS scale),
+// application-level query result caches, CPU cache eviction policies
+// (approximated). All O(1) time per operation.
+//
+// Alternatives to LRU worth knowing: LFU (least frequently used),
+// FIFO, ARC (adaptive replacement, Netflix Hollow), TinyLFU.
 import 'dart:collection';
 
 class LRUCache<K, V> {

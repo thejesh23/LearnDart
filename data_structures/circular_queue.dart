@@ -1,4 +1,17 @@
-// Fixed-capacity ring buffer / circular queue. O(1) enqueue and dequeue.
+// Fixed-capacity ring buffer / circular queue. A pre-allocated array
+// with two indices (head, tail) that wrap around using modular
+// arithmetic. Enqueue at tail, dequeue at head; both O(1).
+//
+// The fixed capacity — enforced via `isFull` — is the whole point.
+// Common in real-time systems, embedded audio/video buffers, and
+// networking layers where memory must be pre-allocated (no
+// garbage collection allowed in the hot path). Also the backing
+// structure for producer-consumer queues in low-latency systems
+// (lock-free ring buffers, LMAX Disruptor, io_uring, DPDK).
+//
+// The `_count` variable disambiguates "head == tail" — otherwise
+// full and empty look identical when the ring wraps.
+// Complexity: O(1) for all ops. Space: O(capacity).
 class CircularQueue<T> {
   final List<T?> _buf;
   int _head = 0;

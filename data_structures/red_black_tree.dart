@@ -1,6 +1,21 @@
-// Left-leaning red-black tree (Sedgewick variant): a BST with an extra
-// bit per node coloring red or black, kept balanced via rotations and
-// color flips so that no red node ever leans right.
+// Left-leaning red-black tree (LLRB), Sedgewick's simplified 2008
+// variant of the classic red-black tree. Every node is red or black;
+// the color invariants keep the tree height at most 2·log₂(n+1).
+//
+// The invariants:
+//   1. Root is black.
+//   2. Red edges never lean right — a red child must be a left child.
+//   3. No two red nodes are consecutive (no red-red parent-child).
+//   4. Every root-to-leaf path has the same number of black nodes.
+//
+// After each insertion, three fix-up steps (in this order) restore
+// the invariants: rotate-left if right-red-not-left-red, rotate-right
+// if left-red and left-left-red, flip colors if both children red.
+//
+// Real-world uses: java.util.TreeMap, C++ std::map, Linux kernel
+// scheduler CFS, Emacs' interval trees. See
+// data_structures/avl_tree.dart for a more strictly-balanced (and
+// more rotation-heavy) alternative.
 enum _Color { red, black }
 
 class _RBNode {

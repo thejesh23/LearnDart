@@ -1,3 +1,19 @@
+// Trie (prefix tree): each node is a step down a shared-prefix path.
+// Storing all children as a Map<char, node> makes insert, contains,
+// and prefix search all O(m) — proportional to the query length,
+// independent of the number of stored strings.
+//
+// Wins over a hash set when: (1) many stored strings share prefixes
+// (memory savings via sharing), (2) you need prefix queries
+// (autocomplete, T9 predictive text, IP routing tables, dictionary
+// word games), (3) you need in-order iteration by lexicographic
+// order.
+//
+// The distinction between `contains` (whole word present?) and
+// `startsWith` (any word starts with this prefix?) is what the
+// isWord flag exists to disambiguate. See strings/kmp_search.dart
+// for the pattern-matching equivalent on a single text.
+
 class _TrieNode {
   final Map<String, _TrieNode> children = {};
   bool isWord = false;

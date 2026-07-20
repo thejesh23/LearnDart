@@ -1,5 +1,17 @@
-// Fenwick tree (Binary Indexed Tree) for prefix-sum queries and point
-// updates. O(log n) per operation. 1-indexed internally.
+// Fenwick tree (Binary Indexed Tree, BIT): a compact tree that
+// supports point-updates and prefix-sum queries, both in O(log n).
+//
+// The magic operation is `x & -x` — extract the lowest set bit of
+// x. Walking up (`x += x & -x`) or down (`x -= x & -x`) with this
+// operation follows exactly the parents/children the Fenwick
+// structure implies. Requires only *n* extra space (vs 2n for a
+// segment tree) and typically outperforms a segment tree on real
+// hardware by 2-3× thanks to smaller cache footprint.
+//
+// Trade-off: Fenwick supports only invertible aggregates (sum, XOR,
+// count) — because range queries subtract two prefix queries. For
+// min/max/gcd you need the more general segment tree
+// (data_structures/segment_tree.dart).
 class FenwickTree {
   final List<int> _bit;
 
