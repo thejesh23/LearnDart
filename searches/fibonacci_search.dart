@@ -1,5 +1,16 @@
-// Fibonacci search: like binary search but the split index is derived from
-// Fibonacci numbers. Uses only addition/subtraction to advance the range.
+// Fibonacci search on a sorted list: same O(log n) complexity as binary
+// search, but the split index is chosen via Fibonacci numbers rather
+// than the midpoint. Because Fibonacci numbers can be advanced by
+// addition/subtraction alone, this technique avoids the division needed
+// for a midpoint on hardware that lacks a fast divide.
+//
+// Historically important on old CPUs and drum memory. On modern
+// hardware, division is cheap and binary search wins on almost every
+// axis (simpler code, better cache behavior, fewer probes on average).
+//
+// Included for its elegance: watch how the golden-ratio-based split
+// naturally produces smaller sub-intervals on the "unlikely" side.
+// Complexity: O(log n).
 int fibonacciSearch(List<int> sorted, int target) {
   final n = sorted.length;
   int fibMm2 = 0;

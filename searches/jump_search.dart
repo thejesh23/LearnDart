@@ -1,3 +1,19 @@
+// Jump search on a sorted list: leap forward in fixed-size blocks of
+// √n elements to bracket the target's range, then do a linear scan
+// within that block.
+//
+// The block size √n minimizes the sum "block jumps + linear scan
+// within a block": worst case is √n + √n = 2√n comparisons, so
+// O(√n) overall — slower than binary search's O(log n) but faster
+// than linear.
+//
+// Where it wins: memory hierarchies where a "jump backward" is
+// dramatically more expensive than a "jump forward" — magnetic tape,
+// external merge storage. Binary search bounces around; jump search
+// only ever reverses within one block. Rarely justified today.
+//
+// Complexity: O(√n) time, O(1) space.
+
 import 'dart:math';
 
 int jumpSearch(List<int> sorted, int target) {

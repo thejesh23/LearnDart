@@ -1,4 +1,19 @@
-// Ternary search on a sorted list — splits into thirds instead of halves.
+// Ternary search on a sorted list: split the range into thirds at every
+// step instead of halves. Each iteration checks two probe positions
+// (m1, m2) and shrinks the range to one of three sub-intervals.
+//
+// It's a common misconception that dividing by 3 makes ternary search
+// faster than binary search. It doesn't: binary search does 1
+// comparison per log2(n) steps ~= log2(n) total; ternary does 2
+// comparisons per log3(n) steps ~= 2 · log3(n) = ~1.26 · log2(n) total.
+// Ternary loses on element comparisons.
+//
+// Where ternary really *is* useful: finding the maximum/minimum of a
+// unimodal function (one hill or one valley), where you compare
+// f(m1) with f(m2) rather than with a target value.
+//
+// Complexity: O(log n) time. See ternary_search_recursive.dart for the
+// recursive variant.
 int ternarySearch(List<int> sorted, int target) {
   int lo = 0;
   int hi = sorted.length - 1;

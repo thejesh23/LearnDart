@@ -1,4 +1,12 @@
-// Recursive ternary search on a sorted list.
+// Recursive ternary search. The recursion mirrors the iterative
+// version's four-way branch (found m1, found m2, target below m1,
+// target above m2, target in between) — each else-if returns a
+// tail-shaped recursive call.
+//
+// See searches/ternary_search.dart for the iterative form and the
+// discussion of why ternary search isn't actually faster than binary
+// search on a sorted array. Complexity: O(log n) time; recursion
+// depth is also O(log n), so stack usage is negligible.
 int ternarySearchRecursive(List<int> sorted, int target,
     [int? lo, int? hi]) {
   lo ??= 0;
