@@ -120,6 +120,26 @@ Every `.dart` file in this repo, grouped by category. Any file can be run with `
 - [vigenere_cipher](ciphers/vigenere_cipher.dart)
 - [xor_cipher](ciphers/xor_cipher.dart)
 
+## concurrency
+- [cancellation_token](concurrency/cancellation_token.dart)
+- [circuit_breaker](concurrency/circuit_breaker.dart)
+- [completer_basics](concurrency/completer_basics.dart)
+- [debounce](concurrency/debounce.dart)
+- [event_bus](concurrency/event_bus.dart)
+- [future_pool](concurrency/future_pool.dart)
+- [isolate_hello](concurrency/isolate_hello.dart)
+- [isolate_parallel_map](concurrency/isolate_parallel_map.dart)
+- [isolate_worker_pool](concurrency/isolate_worker_pool.dart)
+- [mutex](concurrency/mutex.dart)
+- [parallel_map](concurrency/parallel_map.dart)
+- [producer_consumer_queue](concurrency/producer_consumer_queue.dart)
+- [rate_limiter_leaky_bucket](concurrency/rate_limiter_leaky_bucket.dart)
+- [rate_limiter_token_bucket](concurrency/rate_limiter_token_bucket.dart)
+- [retry_with_backoff](concurrency/retry_with_backoff.dart)
+- [semaphore](concurrency/semaphore.dart)
+- [throttle](concurrency/throttle.dart)
+- [timeout_race](concurrency/timeout_race.dart)
+
 ## conversions
 - [decimal_to_binary](conversions/decimal_to_binary.dart)
 - [decimal_to_hexadecimal](conversions/decimal_to_hexadecimal.dart)
