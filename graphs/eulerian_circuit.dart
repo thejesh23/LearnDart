@@ -1,6 +1,21 @@
-// Hierholzer's algorithm: find an Eulerian circuit — a closed walk that
-// uses every edge exactly once. Requires every vertex to have even degree
-// and the graph (on non-isolated vertices) to be connected.
+// Hierholzer's algorithm: find an Eulerian circuit — a closed walk
+// that uses every edge exactly once and returns to start.
+//
+// Existence criteria (Euler, 1736): the graph must be connected on
+// its non-isolated vertices, and every vertex must have *even*
+// degree. That last condition is famously why the Seven Bridges of
+// Königsberg puzzle has no solution — three of the four land masses
+// had odd degree.
+//
+// The algorithm: walk from any starting vertex, following unused
+// edges arbitrarily until you get stuck (which must be back at the
+// start, given even degrees). If you missed edges, splice in a
+// sub-tour by restarting at any visited vertex with unused edges.
+// The stack-based implementation folds both phases into one loop.
+//
+// Complexity: O(V + E). Applications: DNA sequencing (assembly by
+// finding Eulerian paths in the de Bruijn graph), snowplow route
+// planning, delivery routing.
 List<int>? eulerianCircuit(int n, List<(int, int)> edges) {
   final adj = <int, List<int>>{for (int i = 0; i < n; i++) i: []};
   for (final (u, v) in edges) {

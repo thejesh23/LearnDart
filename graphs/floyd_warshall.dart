@@ -1,5 +1,18 @@
-// All-pairs shortest paths in O(n^3). Input is a dense matrix where
-// `graph[i][j]` is the edge weight or double.infinity for absent edges.
+// Floyd-Warshall: shortest paths between *every pair* of nodes.
+// Three nested loops over the vertex set, with the outer loop being
+// the "allowed intermediate vertex" k. After iteration k finishes,
+// dist[i][j] is the shortest path from i to j using only vertices
+// {0..k} as intermediates.
+//
+// Handles negative edge weights but not negative cycles (which will
+// appear as negative diagonal entries after the algorithm runs — an
+// easy post-check for detection).
+//
+// For sparse graphs, running Dijkstra V times is O(V · E · log V) —
+// often much faster than Floyd-Warshall's cubic time. Johnson's
+// algorithm combines the two for the best of both worlds.
+//
+// Complexity: O(V^3) time, O(V^2) space.
 List<List<double>> floydWarshall(List<List<double>> graph) {
   final n = graph.length;
   final dist = [

@@ -1,5 +1,20 @@
-// Tarjan's algorithm: strongly connected components in a directed graph
-// in O(V + E) using a single DFS pass with discovery/lowlink numbers.
+// Tarjan's strongly connected components algorithm.
+//
+// Definitions: a strongly connected component (SCC) is a maximal set
+// of vertices where every vertex is reachable from every other.
+// Tarjan finds all SCCs in a single DFS pass — an elegant improvement
+// over Kosaraju's two-pass approach (graphs/kosaraju_scc.dart).
+//
+// The trick uses two numbers per vertex: `ids[v]` is the DFS
+// discovery order; `low[v]` is the smallest id reachable from v's
+// subtree by tree edges plus at most one back edge to a still-on-
+// stack node. When ids[v] == low[v] at DFS return, v is the "root"
+// of an SCC and everything above it on the stack (down to v) is
+// popped off as one component.
+//
+// Complexity: O(V + E) time and space. Foundation for the "condensation
+// graph" reduction — DAGs of SCCs — which underlies 2-SAT solvers
+// and interconnected-dependency analyzers.
 List<List<int>> tarjanSCC(int n, Map<int, List<int>> graph) {
   int index = 0;
   final ids = List<int>.filled(n, -1);

@@ -1,6 +1,18 @@
-// Articulation points (cut vertices) of an undirected graph — nodes whose
-// removal increases the number of connected components. Tarjan's method
-// with discovery times and lowlink values, single DFS.
+// Articulation points (cut vertices): nodes whose removal disconnects
+// the graph. Together with bridges (cut edges), they identify the
+// "weak spots" in a network.
+//
+// Tarjan's single-DFS approach with discovery times (disc) and
+// lowlink values (low). Two cases identify a cut vertex u:
+//   1. u is a DFS root with more than one child in the DFS tree.
+//   2. u has a child v such that no vertex in v's subtree can reach
+//      an ancestor of u (low[v] >= disc[u]).
+//
+// Used in network reliability analysis (which routers cause the most
+// damage if they go down?), and in social-network analysis to find
+// "brokers" between communities.
+//
+// Complexity: O(V + E) time and space.
 Set<int> articulationPoints(int n, Map<int, List<int>> graph) {
   int timer = 0;
   final disc = List<int>.filled(n, -1);

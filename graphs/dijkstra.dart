@@ -1,8 +1,20 @@
 import 'dart:collection';
 
-// Shortest paths from `start` to every reachable node in a graph with
-// non-negative edge weights. Uses a sorted set as a min-priority queue for
-// clarity — swap in a proper heap for very large graphs.
+// Dijkstra's algorithm: single-source shortest paths in a graph with
+// *non-negative* edge weights. Grow a set of "settled" nodes one at
+// a time, always picking the frontier node with the smallest tentative
+// distance.
+//
+// The correctness depends on non-negativity: the moment you pull a
+// node from the priority queue, no unseen path can beat its recorded
+// distance (any such path would have to go through a node with even
+// smaller distance, which would have been settled first). Negative
+// weights break this invariant — use Bellman-Ford instead
+// (graphs/bellman_ford.dart).
+//
+// Complexity: O((V + E) log V) with a binary heap or sorted set. For
+// dense graphs an O(V^2) array-of-distances form can win. See
+// graphs/a_star.dart for the heuristic-guided variant.
 Map<T, double> dijkstra<T>(Map<T, List<(T, double)>> graph, T start) {
   final dist = <T, double>{start: 0};
   final visited = <T>{};

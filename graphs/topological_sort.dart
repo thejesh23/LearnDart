@@ -1,7 +1,20 @@
 import 'dart:collection';
 
-// Kahn's algorithm: repeatedly remove nodes with zero in-degree.
-// Returns null if the graph has a cycle.
+// Topological sort: linear ordering of a DAG's vertices where every
+// edge (u, v) has u before v in the order. Only exists when the graph
+// has no cycles.
+//
+// Kahn's algorithm: repeatedly remove any node with in-degree 0
+// (nothing depends on it). When the queue empties, either every node
+// was output (success) or a cycle prevents further progress (null).
+//
+// Applications everywhere: build systems (compile files in dependency
+// order — this is what `make` computes), spreadsheet cell evaluation,
+// course-prerequisite scheduling, dependency resolution in package
+// managers, event ordering in distributed systems.
+//
+// DFS also computes topological order (reverse post-order). Both are
+// O(V + E). Complexity: O(V + E) time and space.
 List<T>? topologicalSort<T>(Map<T, List<T>> graph) {
   final inDegree = <T, int>{for (final n in graph.keys) n: 0};
   for (final outs in graph.values) {

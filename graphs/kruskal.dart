@@ -1,5 +1,17 @@
-// Minimum spanning tree via Kruskal's algorithm: sort edges by weight and
-// add each one that doesn't create a cycle (checked with Union-Find).
+// Kruskal's algorithm: build a minimum spanning tree by considering
+// edges in increasing order of weight and accepting each edge that
+// doesn't complete a cycle with previously-accepted edges.
+//
+// The cycle check needs to test "are u and v already in the same
+// connected component?" — the exact query a Disjoint Set Union (DSU)
+// / Union-Find data structure answers in near-constant amortized time.
+// See data_structures/disjoint_set.dart for a standalone DSU.
+//
+// Cleaner than Prim in code and reasoning; often faster on sparse
+// graphs. Both are optimal MST algorithms — the choice is about
+// engineering constants.
+//
+// Complexity: O(E log E) time (dominated by the sort), O(V + E) space.
 class _DSU {
   final List<int> parent;
   final List<int> rank_;

@@ -1,6 +1,18 @@
-// Kosaraju's algorithm: two DFS passes to find strongly connected
-// components. First pass records finish order; second walks the reverse
-// graph in reverse finish order, each traversal collecting one SCC.
+// Kosaraju's strongly connected components algorithm — two DFS passes.
+//
+// Pass 1: DFS on the original graph, recording nodes in finish order.
+// Pass 2: DFS on the *reversed* graph, starting from nodes in reverse
+// finish order. Each traversal visits exactly one SCC.
+//
+// The elegant observation: reversing edges keeps every SCC intact
+// (each SCC's internal reachability is preserved), but breaks all
+// *inter-SCC* connectivity in the opposite direction. Starting from
+// the finish-order last-out nodes, each reverse-DFS can only reach
+// its own SCC — components fall out cleanly.
+//
+// Same complexity as Tarjan (graphs/tarjan_scc.dart), both O(V + E).
+// Tarjan is single-pass and slightly faster in practice; Kosaraju is
+// conceptually clearer and easier to teach.
 List<List<int>> kosarajuSCC(int n, Map<int, List<int>> graph) {
   final visited = List<bool>.filled(n, false);
   final finishOrder = <int>[];

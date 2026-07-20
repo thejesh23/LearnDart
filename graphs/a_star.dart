@@ -1,8 +1,22 @@
 import 'dart:collection';
 import 'dart:math';
 
-// A* on a grid. `grid[r][c] == 0` is walkable, `1` is blocked. Uses
-// Manhattan distance as the heuristic.
+// A* pathfinding on a grid. Like Dijkstra but with a heuristic h(n)
+// estimating the remaining cost to the goal. The priority queue
+// orders nodes by f(n) = g(n) + h(n) — actual cost so far plus
+// estimated cost to go.
+//
+// A* is guaranteed optimal if the heuristic is *admissible* (never
+// overestimates) and *consistent* (satisfies the triangle
+// inequality). Manhattan distance is both for grid movement with unit
+// costs and cardinal neighbors — used here. On graphs with diagonal
+// moves, use Chebyshev; for arbitrary Euclidean paths, use straight-
+// line distance.
+//
+// The whole game-AI pathfinding industry runs on A* variants: HPA*
+// for hierarchical maps, Jump Point Search for uniform-cost grids,
+// D* Lite for changing environments. Complexity: O((V + E) log V)
+// worst case; typically much better due to heuristic pruning.
 List<(int, int)>? aStar(
     List<List<int>> grid, (int, int) start, (int, int) goal) {
   final rows = grid.length;

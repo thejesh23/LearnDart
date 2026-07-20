@@ -1,7 +1,18 @@
 import 'dart:collection';
 
-// Minimum spanning tree via Prim's algorithm. Uses SplayTreeSet as a
-// priority queue for clarity — swap in a proper heap for very large graphs.
+// Prim's algorithm: build a minimum spanning tree by *growing* a
+// single tree from a start vertex. At each step, pick the cheapest
+// edge leading from a tree vertex to a non-tree vertex.
+//
+// Similar shape to Dijkstra — same priority queue skeleton, different
+// key stored. Prim minimizes edge weight from the tree; Dijkstra
+// minimizes cumulative path distance from the source.
+//
+// Complexity: O((V + E) log V) with a binary heap. Contrast with
+// Kruskal (graphs/kruskal.dart), which sorts all edges up front and
+// uses Union-Find. Prim wins on dense graphs (fewer edges to consider
+// per step); Kruskal on sparse graphs (linear-time Union-Find beats
+// heap operations).
 List<(int, int, double)> primMST(int n, Map<int, List<(int, double)>> graph) {
   final inTree = List<bool>.filled(n, false);
   final mst = <(int, int, double)>[];

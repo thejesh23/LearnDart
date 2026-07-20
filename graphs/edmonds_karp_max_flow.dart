@@ -1,7 +1,21 @@
 import 'dart:collection';
 
-// Max flow via Edmonds-Karp: BFS to find augmenting paths in the residual
-// graph, repeat until no path exists. O(V * E^2).
+// Edmonds-Karp max flow: an implementation of the Ford-Fulkerson
+// algorithm that specifically uses BFS to find augmenting paths.
+//
+// Each iteration: BFS through the residual graph (edges still with
+// remaining capacity plus reverse edges from previous flow) to find
+// a source-to-sink path; push the bottleneck capacity through it;
+// repeat until no augmenting path exists. Max-flow min-cut theorem
+// guarantees the total pushed equals the minimum s-t cut.
+//
+// Using BFS (vs Ford-Fulkerson's unspecified path choice) is what
+// bounds Edmonds-Karp at O(V·E²) rather than pseudo-polynomial.
+// Modern max-flow algorithms — Dinic's, Push-Relabel — are faster:
+// O(V²E) and O(V²√E) respectively.
+//
+// Applications: bipartite matching, image segmentation, project
+// selection, network routing capacity planning.
 int edmondsKarp(List<List<int>> capacity, int source, int sink) {
   final n = capacity.length;
   final residual = [for (final row in capacity) List<int>.of(row)];
