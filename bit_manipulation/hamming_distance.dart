@@ -1,4 +1,16 @@
-// The Hamming distance is the number of differing bits between two integers.
+// The Hamming distance between two equal-length values is the number
+// of positions where the bits differ. For integers: XOR the two values
+// (giving 1 in every differing position) and popcount the result.
+//
+// Uses Kernighan's popcount trick from
+// bit_manipulation/count_set_bits.dart — see that file for details.
+//
+// Applications: error-correcting codes rate a code by its minimum
+// Hamming distance (larger => more errors correctable); locality-
+// sensitive hashing uses Hamming distance to approximate similarity;
+// biology compares DNA sequences by treating them as strings and
+// counting mismatches (essentially string-Hamming). Complexity: O(k)
+// where k is the number of differing bits.
 int hammingDistance(int a, int b) {
   int x = a ^ b;
   int count = 0;
