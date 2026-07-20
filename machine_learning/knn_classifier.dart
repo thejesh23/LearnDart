@@ -1,7 +1,19 @@
 import 'dart:math';
 
-// k-nearest-neighbors classifier. No training phase — predictions look at
-// the k closest labeled points and pick the majority label.
+// k-nearest-neighbors classifier: predict the label of a query point by
+// looking at the k labeled training points closest to it and taking the
+// majority vote.
+//
+// KNN is a "lazy learner" — there's no training phase, just remembering
+// the data. All the work happens at prediction time. Simple, interpretable,
+// and surprisingly effective on small datasets. Downsides: predictions
+// scale linearly with training set size (unless you index with a KD-tree
+// — see data_structures/kd_tree.dart), and the algorithm suffers badly
+// when features are on wildly different scales (normalize first) or when
+// the input is high-dimensional (the "curse of dimensionality").
+//
+// Complexity: O(n · d) per prediction with a naive scan (as here), or
+// O(log n) average with a KD-tree in low dimensions.
 double _dist(List<double> a, List<double> b) {
   double sum = 0;
   for (int i = 0; i < a.length; i++) {

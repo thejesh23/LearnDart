@@ -1,5 +1,18 @@
-// Simple ordinary-least-squares linear regression y = a + b*x, closed
-// form via the covariance / variance ratio.
+// Simple ordinary-least-squares linear regression: find the line
+// y = a + b·x that minimizes the sum of squared vertical distances to
+// the data points.
+//
+// Closed-form solution: slope b = cov(x, y) / var(x); intercept a =
+// mean(y) - b · mean(x). No iteration, no learning rate, no
+// convergence to worry about — just one pass through the data.
+//
+// Assumes a linear relationship, roughly normal residuals, and no
+// severe outliers (squared error is very sensitive to them). For
+// multivariate or non-linear cases, extend to matrix form
+// (X^T X)^-1 X^T y or use gradient descent — see
+// machine_learning/logistic_regression.dart for the gradient shape.
+//
+// Complexity: O(n) time, O(1) space.
 (double intercept, double slope) linearRegression(
     List<double> xs, List<double> ys) {
   if (xs.length != ys.length || xs.isEmpty) {

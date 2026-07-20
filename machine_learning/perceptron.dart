@@ -1,5 +1,17 @@
-// Single-layer perceptron: iterative weight updates until the training
-// examples are correctly classified (assuming they are linearly separable).
+// Perceptron: the original (1958, Rosenblatt) single-neuron linear
+// binary classifier. Predict 1 if `w · x + b >= 0`, else 0. Learn by
+// nudging the weights whenever a prediction is wrong:
+//     w := w + lr · (y_true - y_pred) · x
+//
+// The perceptron convergence theorem guarantees this finds a separating
+// hyperplane in a finite number of steps *if one exists*. If the data
+// is not linearly separable (e.g. XOR), training loops forever without
+// making progress — the historical realization of this in 1969 famously
+// stalled neural-network research for a decade.
+//
+// Complexity: O(epochs · n · d) time. Modern deep networks are stacks
+// of these units with non-linear activations, which lifts the
+// linearity limitation entirely.
 class Perceptron {
   final List<double> weights;
   double bias = 0;

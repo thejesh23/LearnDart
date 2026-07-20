@@ -1,6 +1,17 @@
-// Very small ID3-style decision tree for categorical features. Chooses
-// the split with the largest information gain; recursion stops when the
-// node is pure or no features remain.
+// ID3-style decision tree for categorical features. At each node, pick
+// the feature whose split most reduces entropy — the "information gain".
+// Recurse until every leaf is pure (all one label) or no features are
+// left, in which case the leaf votes majority.
+//
+// Entropy H = -sum(p_i · log2 p_i) measures how mixed a set of labels
+// is. Gain(feature) = H(parent) - weighted average of H(children). The
+// greedy top-down choice is not globally optimal (finding the smallest
+// consistent tree is NP-hard) but works well in practice.
+//
+// Downsides: overfits easily, unstable under small data changes,
+// prefers features with many distinct values. Real systems use pruning
+// (C4.5), Gini impurity instead of entropy (CART), or ensembles like
+// random forests and gradient-boosted trees. Complexity: O(n · d · depth).
 import 'dart:math';
 
 double _entropy(List<String> labels) {

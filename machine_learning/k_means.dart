@@ -1,7 +1,18 @@
 import 'dart:math';
 
-// Lloyd's algorithm for k-means clustering on 2-D points. Deterministic
-// initialization (first k points) for reproducibility.
+// Lloyd's algorithm for k-means clustering: partition n points into k
+// groups by alternating two steps until nothing moves:
+//   1. Assignment  — label each point with its nearest centroid.
+//   2. Update      — move each centroid to the mean of its members.
+//
+// Guaranteed to converge (the total within-cluster variance strictly
+// decreases each iteration) but only to a *local* optimum. Different
+// starting centroids give different answers — production code usually
+// runs it several times with random starts (k-means++) and keeps the
+// lowest-variance result.
+//
+// This file uses deterministic init (the first k points) for
+// reproducibility. Complexity: O(iters · n · k · d) time.
 double _dist(List<double> a, List<double> b) =>
     sqrt(pow(a[0] - b[0], 2) + pow(a[1] - b[1], 2));
 

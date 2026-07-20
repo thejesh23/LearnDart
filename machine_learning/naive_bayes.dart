@@ -1,6 +1,19 @@
 import 'dart:math';
 
-// Multinomial Naive Bayes text classifier with Laplace smoothing.
+// Multinomial Naive Bayes text classifier. Apply Bayes' theorem
+// assuming (naïvely, hence the name) that each word appears
+// independently of the others given the class label. In practice this
+// assumption is wildly false and yet the classifier works startlingly
+// well for spam filtering and document topic tagging.
+//
+// The score for a document under class c is:
+//   log P(c) + sum_w [count_w in doc] · log P(w | c)
+// Working in log-space avoids underflow when multiplying many small
+// probabilities. Laplace (add-one) smoothing prevents zero probabilities
+// from unseen words on the test side — otherwise one novel word would
+// veto the entire class.
+//
+// Complexity: O(sum_d |d|) to train and O(|d| · |C|) per prediction.
 class NaiveBayes {
   final Map<String, int> _classCounts = {};
   final Map<String, Map<String, int>> _wordCounts = {};
