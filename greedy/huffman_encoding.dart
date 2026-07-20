@@ -1,5 +1,19 @@
-// Build Huffman codes from a text: the two least-frequent nodes are
-// merged repeatedly until a single tree remains.
+// Huffman encoding: assign shorter binary codes to more frequent symbols,
+// longer codes to rare ones, producing an optimal prefix-free code.
+//
+// Algorithm: build a leaf node for each symbol, then repeatedly merge the
+// two lowest-frequency nodes into a parent (whose frequency is their sum)
+// until one tree remains. Left/right edges give bits 0/1, and the code
+// for each symbol is the root-to-leaf path.
+//
+// The greedy "merge the two smallest" choice is provably optimal — no
+// other prefix code can achieve a shorter total encoded length. Used in
+// gzip, JPEG (DC coefficient tables), PNG, and countless compression
+// formats. For faster construction on very large alphabets use a proper
+// min-priority-queue (data_structures/priority_queue.dart) instead of
+// the linear insert used here.
+//
+// Complexity: O(n log n) with a priority queue, O(n^2) here.
 class _Node implements Comparable<_Node> {
   final int freq;
   final String? char;

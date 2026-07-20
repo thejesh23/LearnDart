@@ -1,5 +1,14 @@
-// Fractional knapsack: items are divisible. Sort by value density (value/
-// weight) and take as much as possible of each in turn.
+// Fractional knapsack: items are divisible — you can take any fraction
+// of an item. Sort by value density (value ÷ weight) and take as much
+// as possible of each in turn until the sack is full.
+//
+// The greedy strategy is optimal *only* because fractions are allowed:
+// there's no situation where breaking a lower-density item in half beats
+// filling with the highest-density item first. Compare with 0/1 knapsack
+// (dynamic_programming/knapsack_01.dart), where items are indivisible
+// and the greedy choice can be badly suboptimal — DP is required.
+//
+// Complexity: O(n log n) time (sort), O(n) space.
 double fractionalKnapsack(List<int> weights, List<int> values, int capacity) {
   final n = weights.length;
   final order = List<int>.generate(n, (i) => i)
