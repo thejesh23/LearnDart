@@ -1,6 +1,18 @@
 // Validate a completed 9×9 sudoku board: every row, column, and 3×3 box
-// contains 1..9 exactly once. Zero denotes empty; treat any zero as
-// invalid for a completed-board check.
+// must contain the digits 1..9 exactly once. Zero denotes empty; treat
+// any zero as invalid for a completed-board check.
+//
+// Three passes through the grid — one for rows, one for columns, one for
+// the nine 3×3 sub-boxes. Each pass uses a Set to detect duplicates in
+// O(1); if `Set.add` ever returns false, the board is invalid.
+//
+// This is the *validation* problem, not the *solving* problem. The solver
+// (a backtracking search) lives in backtracking/sudoku_solver.dart. A
+// solver would call this validator on partial states, or (more commonly)
+// use the same row/column/box constraint checks inline as it recurses.
+//
+// Complexity: O(81) time — the board is a fixed 9×9, so this is effectively
+// constant work. Space: O(9) per Set.
 bool isValidSudoku(List<List<int>> board) {
   for (int i = 0; i < 9; i++) {
     final row = <int>{};

@@ -2,6 +2,20 @@
 //   - live cell with 2 or 3 live neighbors survives
 //   - dead cell with exactly 3 live neighbors is born
 //   - all other cells die or stay dead
+//
+// A cellular automaton: each cell's next state depends only on its
+// current state and the eight neighbors around it. The whole "grid ticks
+// forward together" property is why we build a fresh `next` array and
+// then return it — updating in place would let earlier cells see the
+// new state of their neighbors and give wrong answers.
+//
+// The Game of Life is Turing-complete: with the right initial pattern
+// (glider guns, logic gates, etc.) you can build any computable program
+// out of blinking cells. Famous simple patterns: blinker (period 2),
+// glider (translates diagonally forever), gosper glider gun (emits
+// infinite gliders).
+//
+// Complexity: O(m * n) time, O(m * n) space per tick.
 List<List<int>> gameOfLifeStep(List<List<int>> grid) {
   final m = grid.length;
   final n = grid[0].length;
