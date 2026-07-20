@@ -1,3 +1,16 @@
+// Merge sort: split the list in half, sort each half recursively, then
+// merge the two sorted halves. A textbook divide-and-conquer algorithm
+// invented by John von Neumann in 1945.
+//
+// Guaranteed O(n log n) on every input — no adversarial case that
+// pushes it to O(n^2), unlike quicksort. That predictability is why
+// TimSort uses merge sort as its high-level structure and why external
+// sorts of massive datasets always end up as k-way merges.
+//
+// Downside: needs O(n) auxiliary space for the merge buffer, and
+// naive recursion allocates a lot. Complexity: O(n log n) time,
+// O(n) space. Stable — the `<=` in the merge preserves equal-key
+// order from the left half.
 List<int> mergeSort(List<int> input) {
   if (input.length <= 1) return List<int>.of(input);
   final mid = input.length ~/ 2;

@@ -1,6 +1,16 @@
-// Cocktail shaker sort: bidirectional bubble sort. Each pass bubbles the
-// max to the right, then the min to the left. Reduces the number of passes
-// needed on partially-sorted inputs.
+// Cocktail shaker sort (a.k.a. bidirectional bubble sort). Alternate
+// left-to-right and right-to-left passes, each swapping adjacent
+// out-of-order pairs.
+//
+// The single-direction bubble sort has "turtle" problem: a small
+// element at the end takes n passes to migrate to the front, one step
+// per pass. Cocktail sort fixes this by giving small elements their
+// own leftward passes — turtles reach the front twice as fast.
+//
+// Same asymptotic O(n^2) worst case as bubble sort, but modestly
+// better constant factors and much better on nearly-sorted inputs.
+// Still not competitive with insertion sort for most uses. Complexity:
+// O(n^2) worst, O(n) best, O(1) space. Stable.
 List<int> cocktailSort(List<int> input) {
   final a = List<int>.of(input);
   int start = 0;

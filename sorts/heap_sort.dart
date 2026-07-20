@@ -1,3 +1,18 @@
+// Heap sort: turn the array into a max-heap in-place (bottom-up
+// heapify, O(n)), then repeatedly swap the top with the last unsorted
+// slot and sift-down the new root. Each extraction places one more
+// element in its final position.
+//
+// Guaranteed O(n log n) worst case (unlike quicksort) and O(1) extra
+// space (unlike merge sort). But it's slower than quicksort in
+// practice because it thrashes the cache — each sift-down bounces
+// between memory locations far apart in the array — and its
+// comparisons are more expensive per element.
+//
+// Used inside introsort as the fallback when quicksort's recursion
+// depth exceeds 2 · log n, guaranteeing overall O(n log n). Also the
+// natural sort you get if you push every element into a priority
+// queue and pop them all off. Not stable.
 List<int> heapSort(List<int> input) {
   final a = List<int>.of(input);
   final n = a.length;

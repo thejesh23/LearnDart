@@ -1,4 +1,18 @@
-// LSD radix sort for non-negative integers.
+// LSD (Least Significant Digit) radix sort for non-negative integers.
+// Runs a stable counting sort on each decimal digit from lowest to
+// highest; because each pass is stable, the final ordering respects
+// the earlier passes.
+//
+// A non-comparison sort — the O(n log n) lower bound doesn't apply.
+// Runs in O(d · n) time where d is the number of digits, so it's
+// effectively linear for fixed-width integer keys. Wins over the
+// O(n log n) comparison sorts once n is large enough that d · c1 <
+// log n · c2 for the constants.
+//
+// Base 10 is chosen here for readability; production radix sorts use
+// base 2^8 or 2^16 for cache-friendly buckets. Not comparison-based,
+// so it doesn't work directly on arbitrary types — needs an
+// ordinal encoding. Complexity: O(d · n) time, O(n + k) space.
 List<int> radixSort(List<int> input) {
   if (input.isEmpty) return [];
   final a = List<int>.of(input);

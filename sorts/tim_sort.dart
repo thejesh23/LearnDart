@@ -1,5 +1,20 @@
-// Simplified TimSort: insertion sort on fixed-size runs, then merge them.
-// Not the full CPython/JDK TimSort — enough to convey the shape.
+// Simplified TimSort. Two-phase structure:
+//   1. Divide the array into "runs" of size minRun (32 here) and
+//      insertion-sort each run.
+//   2. Iteratively merge runs into larger sorted regions (like the
+//      merge phase of merge sort).
+//
+// Real TimSort (Python's sorted() and Java's Arrays.sort() for
+// objects, both since 2002) does much more: detects and preserves
+// naturally occurring runs, keeps a stack of pending runs and merges
+// them under specific invariants that keep merges balanced, uses
+// "galloping" to skip long runs of elements from one side. The result
+// is O(n log n) worst case but often O(n) on real-world data with
+// existing partial order.
+//
+// This file shows the shape: insertion sort's speed on small ordered
+// data + merge sort's structural guarantee. Complexity: O(n log n)
+// worst, O(n) best, O(n) space. Stable.
 const int _minRun = 32;
 
 void _insertionSort(List<int> a, int left, int right) {

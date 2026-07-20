@@ -1,6 +1,17 @@
-// Pancake sort: only allowed operation is `flip(k)` — reverse the first
-// k elements. Repeatedly bring the max of the unsorted prefix to index 0
-// then flip it to its final position.
+// Pancake sort: the only operation allowed is `flip(k)` — reverse the
+// first k elements of the array (imagine a stack of pancakes and a
+// spatula). Sort using flips alone.
+//
+// Algorithm: to sort the last n positions, find the max in the
+// unsorted prefix, flip it to index 0, then flip the whole unsorted
+// prefix to send it to the end. Repeat with a smaller prefix.
+//
+// Famous mostly for the "burnt pancake" variant that Bill Gates
+// worked on as an undergrad — his 1979 paper is his only academic
+// publication. Practical uses are rare (this is a puzzle, not a
+// speed sort), but it's the natural model for any device whose only
+// operation is a prefix reversal — including some parallel-processor
+// architectures. Complexity: O(n^2) time, O(1) space. Not stable.
 void _flip(List<int> a, int k) {
   int i = 0, j = k;
   while (i < j) {

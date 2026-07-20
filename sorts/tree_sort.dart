@@ -1,4 +1,16 @@
-// Tree sort: build a BST and read it back in-order.
+// Tree sort: insert every element into a binary search tree, then
+// walk the tree in-order to read the elements out in sorted order.
+//
+// Complexity depends on the BST. With a *balanced* tree (AVL or
+// red-black — see data_structures/avl_tree.dart and
+// data_structures/red_black_tree.dart) it's O(n log n) worst case.
+// With the plain BST used here, worst case is O(n^2) — insert already-
+// sorted input and you build a linked list of right children.
+//
+// Rarely used as a general-purpose sort (merge/quick/tim are better)
+// but it's a fine teaching example connecting sorts to trees, and
+// it's the natural output of any dataset already indexed by a BST or
+// std::set / TreeSet.
 class _Node {
   int value;
   _Node? left, right;
