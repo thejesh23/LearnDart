@@ -1,5 +1,17 @@
-// Can `s` be segmented into a space-separated sequence of dictionary words?
-// Backtracking with a visited set to avoid re-exploring the same prefix.
+// Can `s` be segmented into a sequence of dictionary words? For each
+// prefix of `s`, if the prefix is in the dictionary, recurse on the
+// remainder.
+//
+// Naive backtracking would revisit the same suffix many times over
+// (different prefixes can lead to the same starting index). The
+// `failed` set is memoization for the *negative* answers: once we've
+// proven no segmentation starts at index i, remember it and short-
+// circuit any future call. This turns exponential worst-case work into
+// O(n^2) — essentially a top-down variant of the DP solution.
+//
+// Complexity: O(n^2 · maxWordLength) once memoized. Related:
+// dynamic_programming/palindrome_partitioning.dart uses the same
+// prefix-DP shape for a related segmentation problem.
 bool wordBreak(String s, Set<String> dict) {
   final failed = <int>{};
   bool helper(int start) {

@@ -1,6 +1,17 @@
-// Find every combination of `candidates` (each usable any number of
-// times) that sums to `target`. Duplicates in output are avoided by
-// only ever recursing on the same-or-later index.
+// Enumerate every combination of `candidates` — each candidate usable
+// unlimited times — that sums to `target`.
+//
+// Two tricks avoid duplicate outputs:
+//   1. Sort candidates ascending, then break when a candidate exceeds
+//      the remaining target. That's pure pruning — no wasted branches
+//      exploring larger-than-needed values.
+//   2. Recurse with the same start index `i` (not `i + 1`) so the same
+//      candidate can be reused, but never step *backward* — this
+//      canonicalizes each combination to non-decreasing order and
+//      guarantees each unique combination is produced exactly once.
+//
+// Complexity: exponential in the worst case. Related: subset_sum.dart
+// uses each element at most once instead of unlimited times.
 List<List<int>> combinationSum(List<int> candidates, int target) {
   final sorted = List<int>.of(candidates)..sort();
   final results = <List<int>>[];

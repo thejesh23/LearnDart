@@ -1,4 +1,16 @@
 // Enumerate every subset of `nums` that sums to `target`.
+//
+// The recursion is the same binary "include-or-skip" shape as
+// recursion/subset_generation.dart, but we prune branches that can't
+// possibly reach the target (`remaining < 0`) or that have run out of
+// elements. This class of problem is NP-hard in general — you can't
+// hope for polynomial-time enumeration when the number of solutions
+// itself can be exponential.
+//
+// For the *decision* version ("is there any subset that sums to
+// target?") the pseudo-polynomial DP in
+// dynamic_programming/partition_equal_subset_sum.dart is much faster
+// when the target is small. Complexity: O(2^n) worst case here.
 List<List<int>> subsetsSummingTo(List<int> nums, int target) {
   final results = <List<int>>[];
   final current = <int>[];

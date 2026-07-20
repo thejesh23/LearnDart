@@ -1,6 +1,16 @@
-// Knight's tour: visit every square of an n×n board exactly once. Simple
-// backtracking — Warnsdorff's heuristic would let it scale further, but
-// this suffices for small boards.
+// Knight's tour: move a chess knight around an n×n board so it visits
+// every square exactly once (a Hamiltonian path over the "knight-move"
+// graph).
+//
+// Naive backtracking works for small boards but explodes combinatorially
+// as n grows. Warnsdorff's heuristic — always move to the square with
+// the fewest onward options — solves an 8×8 board almost instantly by
+// biasing the search toward corners early. This file uses plain
+// backtracking for clarity; add Warnsdorff by sorting the 8 candidate
+// moves by their degree before recursing.
+//
+// Complexity: exponential worst case. On an 8×8 board a plain search
+// like this one may take minutes; Warnsdorff completes in microseconds.
 List<List<int>>? knightTour(int n, {(int, int) start = (0, 0)}) {
   const dr = [2, 1, -1, -2, -2, -1, 1, 2];
   const dc = [1, 2, 2, 1, -1, -2, -2, -1];

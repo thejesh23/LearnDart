@@ -1,6 +1,15 @@
-// Find a Hamiltonian path in a directed graph — a path that visits every
-// node exactly once. NP-complete in general; this brute-force backtrack
-// works fine for small inputs.
+// Find a Hamiltonian path in a directed graph — a path that visits
+// every node exactly once. This is one of Karp's original 21 NP-complete
+// problems (1972); no polynomial-time algorithm is known.
+//
+// The backtrack tries each unvisited neighbor at each step and undoes
+// the choice if the recursion can't complete the path. Trying every
+// starting node covers cases where no path begins at node 0.
+//
+// Special case: a Hamiltonian *cycle* just needs `path[last]` to have
+// an edge back to `path[0]` at the end — one extra check. The
+// Traveling Salesperson Problem is the weighted-min version and is
+// even harder in practice. Complexity: O(n!) worst case.
 List<int>? hamiltonianPath(int n, Map<int, List<int>> graph) {
   final visited = List<bool>.filled(n, false);
   final path = <int>[];
