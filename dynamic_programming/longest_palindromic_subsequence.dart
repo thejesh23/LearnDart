@@ -1,5 +1,16 @@
-// Length of the longest subsequence of `s` that reads the same forwards
-// and backwards. LCS of `s` with reverse(s), by way of a 2-D DP.
+// Longest palindromic *subsequence* of a string — chars in original
+// order, not necessarily contiguous. Longest palindromic *substring*
+// (contiguous) is a different problem — see strings/manacher.dart.
+//
+// DP state: dp[i][j] = length of the longest palindromic subsequence
+// in s[i..j]. Transition: if the endpoints match, extend the inner
+// answer by 2; else recurse on either dropping the left or right end.
+//
+// Elegant alternative: LPS(s) == LCS(s, reverse(s)). If you already
+// have an LCS routine (dynamic_programming/longest_common_subsequence.dart),
+// this problem is one call away with no new code.
+//
+// Complexity: O(n^2) time and space.
 int longestPalindromicSubsequence(String s) {
   final n = s.length;
   if (n == 0) return 0;

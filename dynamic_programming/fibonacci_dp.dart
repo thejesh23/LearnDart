@@ -1,5 +1,16 @@
-// Bottom-up tabulated Fibonacci — O(n) time, O(n) space. See
-// maths/fibonacci_iterative.dart for the O(1)-space variant.
+// Fibonacci via bottom-up dynamic programming: fill an array in order,
+// each entry the sum of its two predecessors. O(n) time, O(n) space.
+//
+// This tabulated form is what "DP" traditionally meant — an iterative
+// pass through a table. The equivalent top-down approach (memoized
+// recursion) lives in maths/fibonacci_memoized.dart. Two mental
+// pictures of the same computation:
+//   - top-down: recursion + cache, computes only what's needed
+//   - bottom-up: iteration + table, computes everything up to n
+// Both O(n); pick whichever fits the shape of the sub-problem graph.
+//
+// The O(1)-space rolling-window variant is at
+// maths/fibonacci_iterative.dart — same asymptotic time, tiny memory.
 BigInt fibonacciDP(int n) {
   if (n < 0) throw ArgumentError('n must be non-negative');
   final table = List<BigInt>.filled(n + 1, BigInt.zero);

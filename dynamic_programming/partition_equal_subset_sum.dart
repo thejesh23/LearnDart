@@ -1,5 +1,17 @@
-// Can the array be split into two subsets with equal sum? Reduces to a
-// subset-sum question over half the total. Uses a 1-D bitset-style DP.
+// Partition a set of positive integers into two subsets with equal
+// sum? Reduces to subset-sum: reachable[target] where target = sum/2.
+//
+// DP state: reachable[s] = "is there a subset summing to s?" Update
+// each element by iterating *backwards* — that's what turns the naive
+// 2-D DP into 1-D. Going backwards ensures each element is used at
+// most once (0/1 semantics); forwards would allow unlimited reuse
+// (unbounded knapsack).
+//
+// Same core as 0/1 knapsack, boolean-valued instead of numerical.
+// Solved in O(n · sum) — pseudo-polynomial, so tractable when the
+// total is small (up to ~10^5 or so).
+//
+// Complexity: O(n · sum) time, O(sum) space.
 bool canPartition(List<int> nums) {
   final total = nums.fold<int>(0, (a, b) => a + b);
   if (total.isOdd) return false;

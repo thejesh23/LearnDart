@@ -1,6 +1,19 @@
-// Egg drop puzzle: given `eggs` eggs and a `floors`-story building, find
-// the minimum number of trials needed to identify the highest safe floor
-// in the worst case.
+// Egg-drop puzzle: given `eggs` identical eggs and a `floors`-story
+// building, find the minimum number of drops needed in the *worst case*
+// to identify the highest floor from which an egg can be dropped
+// without breaking.
+//
+// DP state: dp[e][f] = min worst-case drops with e eggs and f floors.
+// From floor x you either break the egg (dp[e-1][x-1] to find the
+// answer below) or don't (dp[e][f-x] to find the answer above); the
+// worst case is the max, and you pick x to minimize that max.
+//
+// With 1 egg you must go linearly bottom-up (f drops). With enough
+// eggs, binary-search gives log₂ f. In between there's a smoothly
+// interpolating strategy — and a beautiful closed-form solution using
+// binomial coefficients that this DP approximates.
+//
+// Complexity: O(eggs · floors^2) time; can be reduced to O(eggs · f · log f).
 int eggDrop(int eggs, int floors) {
   final dp = List.generate(eggs + 1, (_) => List<int>.filled(floors + 1, 0));
   for (int e = 1; e <= eggs; e++) {

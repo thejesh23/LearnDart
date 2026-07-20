@@ -1,5 +1,18 @@
-// Minimum-cost path from top-left to bottom-right, moving only right or
-// down. In-place DP: overwrite the grid with cumulative minima.
+// Grid DP: find the minimum-cost path from top-left to bottom-right
+// of a grid, moving only right or down at each step.
+//
+// DP recurrence: dp[i][j] = grid[i][j] + min(dp[i-1][j], dp[i][j-1]).
+// Border cells only have one predecessor. Because we walk the grid
+// top-to-bottom, left-to-right, we can safely overwrite grid[i][j]
+// with its cumulative minimum in place — no separate DP array needed.
+//
+// Cousin problems:
+//   - unique_paths.dart (count paths rather than min cost)
+//   - "max score" (flip min → max, keep the rest)
+//   - "min falling path" (three predecessors instead of two)
+// The shape is the same; only the transition operator changes.
+//
+// Complexity: O(m · n) time, O(1) extra space (in-place).
 int minPathSum(List<List<int>> grid) {
   final m = grid.length;
   if (m == 0) return 0;
