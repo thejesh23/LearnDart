@@ -1,5 +1,15 @@
-// C(n, k) via Pascal-triangle recurrence, kept in a rolling row so memory
-// stays O(k). Uses BigInt to avoid overflow.
+// Binomial coefficient C(n, k) — the number of ways to choose k items
+// from n. Computed incrementally as ((n-i)/(i+1)) accumulated, which
+// keeps intermediate values bounded and never requires computing n!
+// directly.
+//
+// The `if (k > n - k) k = n - k` line uses the symmetry
+// C(n, k) = C(n, n - k) to halve the work when k is close to n.
+//
+// Applications: probability (Bernoulli / binomial distributions),
+// Pascal's triangle, combinatorial counting, DP transition-count
+// formulas. Uses BigInt because C grows fast — C(52, 26) is already
+// a 15-digit number. Complexity: O(k) multiplications.
 BigInt binomial(int n, int k) {
   if (k < 0 || k > n) return BigInt.zero;
   if (k > n - k) k = n - k;
