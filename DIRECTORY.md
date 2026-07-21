@@ -126,6 +126,11 @@ Every `.dart` file in this repo, grouped by category. Any file can be run with `
 - [vigenere_cipher](ciphers/vigenere_cipher.dart)
 - [xor_cipher](ciphers/xor_cipher.dart)
 
+## compression
+- [arithmetic_coding](compression/arithmetic_coding.dart)
+- [burrows_wheeler](compression/burrows_wheeler.dart)
+- [lz77](compression/lz77.dart)
+
 ## concurrency
 - [cancellation_token](concurrency/cancellation_token.dart)
 - [circuit_breaker](concurrency/circuit_breaker.dart)
@@ -151,6 +156,12 @@ Every `.dart` file in this repo, grouped by category. Any file can be run with `
 - [decimal_to_hexadecimal](conversions/decimal_to_hexadecimal.dart)
 - [integer_to_roman](conversions/integer_to_roman.dart)
 - [roman_to_integer](conversions/roman_to_integer.dart)
+
+## crypto
+- [aes_sbox](crypto/aes_sbox.dart)
+- [diffie_hellman](crypto/diffie_hellman.dart)
+- [rsa](crypto/rsa.dart)
+- [sha256](crypto/sha256.dart)
 
 ## data_structures
 - [avl_tree](data_structures/avl_tree.dart)
@@ -184,12 +195,21 @@ Every `.dart` file in this repo, grouped by category. Any file can be run with `
 - [treap](data_structures/treap.dart)
 - [trie](data_structures/trie.dart)
 
+## distributed
+- [consistent_hashing](distributed/consistent_hashing.dart)
+- [crdt](distributed/crdt.dart)
+- [raft](distributed/raft.dart)
+- [vector_clock](distributed/vector_clock.dart)
+
 ## dynamic_programming
+- [bitmask_tsp](dynamic_programming/bitmask_tsp.dart)
 - [boolean_parenthesization](dynamic_programming/boolean_parenthesization.dart)
 - [catalan_numbers](dynamic_programming/catalan_numbers.dart)
 - [climb_stairs](dynamic_programming/climb_stairs.dart)
 - [coin_change](dynamic_programming/coin_change.dart)
+- [convex_hull_trick](dynamic_programming/convex_hull_trick.dart)
 - [distinct_subsequences](dynamic_programming/distinct_subsequences.dart)
+- [divide_conquer_dp](dynamic_programming/divide_conquer_dp.dart)
 - [edit_distance](dynamic_programming/edit_distance.dart)
 - [egg_drop](dynamic_programming/egg_drop.dart)
 - [fibonacci_dp](dynamic_programming/fibonacci_dp.dart)
@@ -312,6 +332,11 @@ Every `.dart` file in this repo, grouped by category. Any file can be run with `
 - [pollard_rho](number_theory/pollard_rho.dart)
 - [sieve_of_atkin](number_theory/sieve_of_atkin.dart)
 
+## numeric
+- [fft](numeric/fft.dart)
+- [newton_raphson](numeric/newton_raphson.dart)
+- [ntt](numeric/ntt.dart)
+
 ## parsers
 - [recursive_descent_expr](parsers/recursive_descent_expr.dart)
 - [shunting_yard](parsers/shunting_yard.dart)
@@ -344,6 +369,11 @@ Every `.dart` file in this repo, grouped by category. Any file can be run with `
 - [fizzbuzz](puzzles/fizzbuzz.dart)
 - [game_of_life](puzzles/game_of_life.dart)
 - [sudoku_validator](puzzles/sudoku_validator.dart)
+
+## reactive
+- [observable](reactive/observable.dart)
+- [rx_operators](reactive/rx_operators.dart)
+- [switchmap](reactive/switchmap.dart)
 
 ## recursion
 - [ackermann](recursion/ackermann.dart)
