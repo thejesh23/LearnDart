@@ -89,6 +89,12 @@ Every `.dart` file in this repo, grouped by category. Any file can be run with `
 - [throwing_exceptions](basics/11_errors/throwing_exceptions.dart)
 - [try_catch](basics/11_errors/try_catch.dart)
 
+## compilers
+- [ast](compilers/ast.dart)
+- [compiler](compilers/compiler.dart)
+- [interpreter](compilers/interpreter.dart)
+- [vm](compilers/vm.dart)
+
 ## backtracking
 - [combination_sum](backtracking/combination_sum.dart)
 - [hamiltonian_path](backtracking/hamiltonian_path.dart)
@@ -310,6 +316,12 @@ Every `.dart` file in this repo, grouped by category. Any file can be run with `
 - [recursive_descent_expr](parsers/recursive_descent_expr.dart)
 - [shunting_yard](parsers/shunting_yard.dart)
 - [tokenizer](parsers/tokenizer.dart)
+
+## probabilistic
+- [count_min_sketch](probabilistic/count_min_sketch.dart)
+- [hyperloglog](probabilistic/hyperloglog.dart)
+- [minhash](probabilistic/minhash.dart)
+- [reservoir_sampling](probabilistic/reservoir_sampling.dart)
 
 ## project_euler
 - [problem_001_multiples_of_3_or_5](project_euler/problem_001_multiples_of_3_or_5.dart)
