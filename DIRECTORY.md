@@ -148,6 +148,7 @@ Every `.dart` file in this repo, grouped by category. Any file can be run with `
 
 ## data_structures
 - [avl_tree](data_structures/avl_tree.dart)
+- [b_tree](data_structures/b_tree.dart)
 - [binary_search_tree](data_structures/binary_search_tree.dart)
 - [binary_tree](data_structures/binary_tree.dart)
 - [binary_tree_path_sum](data_structures/binary_tree_path_sum.dart)
@@ -167,6 +168,7 @@ Every `.dart` file in this repo, grouped by category. Any file can be run with `
 - [max_heap](data_structures/max_heap.dart)
 - [merge_sorted_lists](data_structures/merge_sorted_lists.dart)
 - [min_heap](data_structures/min_heap.dart)
+- [patricia_trie](data_structures/patricia_trie.dart)
 - [priority_queue](data_structures/priority_queue.dart)
 - [queue](data_structures/queue.dart)
 - [red_black_tree](data_structures/red_black_tree.dart)
@@ -199,6 +201,11 @@ Every `.dart` file in this repo, grouped by category. Any file can be run with `
 - [partition_equal_subset_sum](dynamic_programming/partition_equal_subset_sum.dart)
 - [rod_cutting](dynamic_programming/rod_cutting.dart)
 - [unique_paths](dynamic_programming/unique_paths.dart)
+
+## game_theory
+- [alpha_beta_pruning](game_theory/alpha_beta_pruning.dart)
+- [mcts](game_theory/mcts.dart)
+- [minimax](game_theory/minimax.dart)
 
 ## geometry
 - [closest_pair](geometry/closest_pair.dart)
@@ -249,6 +256,7 @@ Every `.dart` file in this repo, grouped by category. Any file can be run with `
 - [linear_regression](machine_learning/linear_regression.dart)
 - [logistic_regression](machine_learning/logistic_regression.dart)
 - [naive_bayes](machine_learning/naive_bayes.dart)
+- [neural_network](machine_learning/neural_network.dart)
 - [perceptron](machine_learning/perceptron.dart)
 - [relu](machine_learning/relu.dart)
 - [sigmoid](machine_learning/sigmoid.dart)
@@ -297,6 +305,11 @@ Every `.dart` file in this repo, grouped by category. Any file can be run with `
 - [modular_inverse](number_theory/modular_inverse.dart)
 - [pollard_rho](number_theory/pollard_rho.dart)
 - [sieve_of_atkin](number_theory/sieve_of_atkin.dart)
+
+## parsers
+- [recursive_descent_expr](parsers/recursive_descent_expr.dart)
+- [shunting_yard](parsers/shunting_yard.dart)
+- [tokenizer](parsers/tokenizer.dart)
 
 ## project_euler
 - [problem_001_multiples_of_3_or_5](project_euler/problem_001_multiples_of_3_or_5.dart)
@@ -362,6 +375,7 @@ Every `.dart` file in this repo, grouped by category. Any file can be run with `
 - [tree_sort](sorts/tree_sort.dart)
 
 ## strings
+- [aho_corasick](strings/aho_corasick.dart)
 - [boyer_moore_search](strings/boyer_moore_search.dart)
 - [character_frequency](strings/character_frequency.dart)
 - [is_anagram](strings/is_anagram.dart)
@@ -376,6 +390,7 @@ Every `.dart` file in this repo, grouped by category. Any file can be run with `
 - [reverse_words_in_sentence](strings/reverse_words_in_sentence.dart)
 - [run_length_encoding](strings/run_length_encoding.dart)
 - [string_compression](strings/string_compression.dart)
+- [suffix_array](strings/suffix_array.dart)
 - [valid_parentheses](strings/valid_parentheses.dart)
 - [word_count](strings/word_count.dart)
 - [z_algorithm](strings/z_algorithm.dart)
